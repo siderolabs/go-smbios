@@ -13,6 +13,46 @@ type SystemInformationStructure struct {
 	smbios.Structure
 }
 
+type WakeUp int
+
+const (
+	TypeReserved WakeUp = iota
+	TypeOther
+	TypeUnknown
+	TypeAPMTimer
+	TypeModemRing
+	TypeLANRemote
+	TypePowerSwitch
+	TypePCIPME
+	TypeACPowerRestored
+)
+
+const (
+	typeReserved        = "Reserved"
+	typeOther           = "Other"
+	typeUnknown         = "Unknown"
+	typeAPMTimer        = "APM Timer"
+	typeModemRing       = "Modem Ring"
+	typeLANRemote       = "LAN Remote"
+	typePowerSwitch     = "Power Switch"
+	typePCIPME          = "PCI PME#"
+	typeACPowerRestored = "AC Power Restored"
+)
+
+func (w WakeUp) String() string {
+	return [...]string{
+		typeReserved,
+		typeOther,
+		typeUnknown,
+		typeAPMTimer,
+		typeModemRing,
+		typeLANRemote,
+		typePowerSwitch,
+		typePCIPME,
+		typeACPowerRestored,
+	}[w]
+}
+
 func (s Smbios) SystemInformation() SystemInformationStructure {
 	return s.SystemInformationStructure
 }
@@ -39,6 +79,11 @@ func (s SystemInformationStructure) SKUNumber() string {
 
 func (s SystemInformationStructure) Family() string {
 	return get(s.Structure, 5)
+}
+
+func (s SystemInformationStructure) WakeUpType() string {
+	t := WakeUp(s.Formatted[20])
+	return t.String()
 }
 
 func (s SystemInformationStructure) UUID() (uid uuid.UUID, err error) {
