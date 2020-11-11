@@ -1,3 +1,7 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 package smbios
 
 import (
@@ -8,7 +12,8 @@ import (
 	"github.com/digitalocean/go-smbios/smbios"
 )
 
-type Smbios struct {
+// SMBIOS represents the Sysytem Management BIOS.
+type SMBIOS struct {
 	Version    string
 	Structures []*smbios.Structure
 
@@ -24,22 +29,28 @@ type Smbios struct {
 	SystemConfigurationOptionsStructure SystemConfigurationOptionsStructure
 	BIOSLanguageInformationStructure    BIOSLanguageInformationStructure
 	GroupAssociationsStructure          GroupAssociationsStructure
+	PhysicalMemoryArrayStructure        PhysicalMemoryArrayStructure
 }
 
-func New() (*Smbios, error) {
+// New initializes and returns a new `SMBIOS`
+//
+//nolint: gocyclo
+func New() (*SMBIOS, error) {
 	rc, ep, err := smbios.Stream()
 	if err != nil {
 		return nil, fmt.Errorf("failed to open stream: %w", err)
 	}
 
+	//nolint: errcheck
 	defer rc.Close()
 
-	s := &Smbios{}
+	s := &SMBIOS{}
 
 	major, minor, rev := ep.Version()
 	s.Version = fmt.Sprintf("%d.%d.%d", major, minor, rev)
 
 	d := smbios.NewDecoder(rc)
+
 	ss, err := d.Decode()
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode structures: %w", err)
@@ -86,6 +97,10 @@ func New() (*Smbios, error) {
 				s.BIOSLanguageInformationStructure = BIOSLanguageInformationStructure{Structure: *ss}
 			case 14:
 				s.GroupAssociationsStructure = GroupAssociationsStructure{Structure: *ss}
+			case 15:
+				// Unimplemented.
+			case 16:
+				s.PhysicalMemoryArrayStructure = PhysicalMemoryArrayStructure{Structure: *ss}
 			}
 		}(structure)
 	}
