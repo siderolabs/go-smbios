@@ -226,23 +226,6 @@ func (s PhysicalMemoryArrayStructure) MaximumCapacity() MaximumCapacity {
 	return MaximumCapacity(binary.LittleEndian.Uint32(s.Formatted[3:7]))
 }
 
-// MemoryErrorInformationHandle  reprents the physical memory array memory error
-// handle information.
-type MemoryErrorInformationHandle uint16
-
-// String returns the string representation of a `MemoryErrorInformationHandle `.
-func (m MemoryErrorInformationHandle) String() string {
-	if m == 0xFFFE {
-		return "Not Provided"
-	}
-
-	if m == 0xFFFF {
-		return "No Error Detected"
-	}
-
-	return fmt.Sprintf("%d", m)
-}
-
 // MemoryErrorInformationHandle returns the handle, or instance number, associated with
 // any error that was previously detected for the
 // array. If the system does not provide the error
