@@ -30,6 +30,7 @@ type SMBIOS struct {
 	BIOSLanguageInformationStructure    BIOSLanguageInformationStructure
 	GroupAssociationsStructure          GroupAssociationsStructure
 	PhysicalMemoryArrayStructure        PhysicalMemoryArrayStructure
+	MemoryDeviceStructure               MemoryDeviceStructure
 }
 
 // New initializes and returns a new `SMBIOS`
@@ -101,6 +102,8 @@ func New() (*SMBIOS, error) {
 				// Unimplemented.
 			case 16:
 				s.PhysicalMemoryArrayStructure = PhysicalMemoryArrayStructure{Structure: *ss}
+			case 17:
+				s.MemoryDeviceStructure = MemoryDeviceStructure{Structure: *ss}
 			}
 		}(structure)
 	}
