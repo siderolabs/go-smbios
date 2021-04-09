@@ -16,6 +16,7 @@ import (
 // SystemInformationStructure represents the SMBIOS system information structure.
 type SystemInformationStructure struct {
 	smbios.Structure
+	smbios *SMBIOS
 }
 
 // WakeUp defines the Wake-up Type enum.
@@ -70,6 +71,8 @@ func (w WakeUp) String() string {
 
 // SystemInformation returns a `SystemInformationStructure`.
 func (s SMBIOS) SystemInformation() SystemInformationStructure {
+	s.SystemInformationStructure.smbios = &s
+
 	return s.SystemInformationStructure
 }
 
@@ -110,10 +113,20 @@ func (s SystemInformationStructure) WakeUpType() string {
 }
 
 // UUID returns the system UUID.
+// Return middle endian only if SBIOS version >= 2.6.
+// Reference: http://dnaeon.github.io/convert-big-endian-uuid-to-middle-endian/
 func (s SystemInformationStructure) UUID() (uid uuid.UUID, err error) {
-	b, err := toMiddleEndian(s.Formatted)
-	if err != nil {
-		return uid, fmt.Errorf("failed to convernt to middle endian: %w", err)
+	var b []byte
+	if s.smbios.Version.Major >= 3 || (s.smbios.Version.Major == 2 && s.smbios.Version.Minor >= 6) {
+		b, err = toMiddleEndian(s.Formatted)
+		if err != nil {
+			return uid, fmt.Errorf("failed to convert to middle endian: %w", err)
+		}
+	} else {
+		b, err = toBigEndian(s.Formatted)
+		if err != nil {
+			return uid, fmt.Errorf("failed to convert to big endian: %w", err)
+		}
 	}
 
 	uid, err = uuid.FromBytes(b)
@@ -121,10 +134,19 @@ func (s SystemInformationStructure) UUID() (uid uuid.UUID, err error) {
 		return uid, fmt.Errorf("invalid UUID: %w", err)
 	}
 
-	// TODO(andrewrynhard): Return middle endian only if SBIOS version > 2.6.
-	// Reference: http://dnaeon.github.io/convert-big-endian-uuid-to-middle-endian/
-
 	return uid, nil
+}
+
+func toBigEndian(formatted []byte) (b []byte, err error) {
+	buf := bytes.NewBuffer(make([]byte, 0, 16))
+
+	if err := binary.Write(buf, binary.BigEndian, formatted[4:20]); err != nil {
+		return nil, err
+	}
+
+	b = buf.Bytes()
+
+	return b, nil
 }
 
 func toMiddleEndian(formatted []byte) (b []byte, err error) {
