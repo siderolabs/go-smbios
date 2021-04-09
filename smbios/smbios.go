@@ -14,7 +14,11 @@ import (
 
 // SMBIOS represents the Sysytem Management BIOS.
 type SMBIOS struct {
-	Version    string
+	Version struct {
+		Major    int
+		Minor    int
+		Revision int
+	}
 	Structures []*smbios.Structure
 
 	BIOSInformationStructure            BIOSInformationStructure
@@ -47,8 +51,7 @@ func New() (*SMBIOS, error) {
 
 	s := &SMBIOS{}
 
-	major, minor, rev := ep.Version()
-	s.Version = fmt.Sprintf("%d.%d.%d", major, minor, rev)
+	s.Version.Major, s.Version.Minor, s.Version.Revision = ep.Version()
 
 	d := smbios.NewDecoder(rc)
 
