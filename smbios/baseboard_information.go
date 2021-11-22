@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // BaseboardInformationStructure represents the SMBIOS baseboard information structure.
 type BaseboardInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // BaseboardInformation returns a `BaseboardInformationStructure`.
-func (s SMBIOS) BaseboardInformation() BaseboardInformationStructure {
+func (s *SMBIOS) BaseboardInformation() BaseboardInformationStructure {
 	return s.BaseboardInformationStructure
 }
 

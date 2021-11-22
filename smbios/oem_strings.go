@@ -8,7 +8,7 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // OEMStringsStructure represents the SMBIOS OEM strings structure.
 type OEMStringsStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // OEMStrings returns the OEM strings.

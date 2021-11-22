@@ -14,11 +14,11 @@ import (
 
 // MemoryDeviceStructure represents the SMBIOS memory device structure.
 type MemoryDeviceStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // MemoryDevice returns a `MemoryDeviceStructure`.
-func (s SMBIOS) MemoryDevice() MemoryDeviceStructure {
+func (s *SMBIOS) MemoryDevice() MemoryDeviceStructure {
 	return s.MemoryDeviceStructure
 }
 

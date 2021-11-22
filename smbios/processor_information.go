@@ -8,7 +8,7 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // ProcessorInformationStructure represents the SMBIOS process information structure.
 type ProcessorInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // ProcessorInformation returns a `ProcessorInformationStructure`.

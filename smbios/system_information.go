@@ -15,7 +15,7 @@ import (
 
 // SystemInformationStructure represents the SMBIOS system information structure.
 type SystemInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 	smbios *SMBIOS
 }
 
@@ -70,8 +70,8 @@ func (w WakeUp) String() string {
 }
 
 // SystemInformation returns a `SystemInformationStructure`.
-func (s SMBIOS) SystemInformation() SystemInformationStructure {
-	s.SystemInformationStructure.smbios = &s
+func (s *SMBIOS) SystemInformation() SystemInformationStructure {
+	s.SystemInformationStructure.smbios = s
 
 	return s.SystemInformationStructure
 }

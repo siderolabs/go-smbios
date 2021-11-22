@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // GroupAssociationsStructure represents the SMBIOS group associations structure.
 type GroupAssociationsStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // GroupAssociations returns a `GroupAssociationsStructure`.
-func (s SMBIOS) GroupAssociations() GroupAssociationsStructure {
+func (s *SMBIOS) GroupAssociations() GroupAssociationsStructure {
 	return s.GroupAssociationsStructure
 }
 

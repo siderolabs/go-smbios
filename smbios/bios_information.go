@@ -8,7 +8,7 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // BIOSInformationStructure represents the BIOS information structure.
 type BIOSInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // BIOSInformation returns a `BIOSInformationStructure`.

@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // PortConnectorInformationStructure represents the port connector information structure.
 type PortConnectorInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // PortConnectorInformation returns a `PortConnectorInformationStructure`.
-func (s SMBIOS) PortConnectorInformation() PortConnectorInformationStructure {
+func (s *SMBIOS) PortConnectorInformation() PortConnectorInformationStructure {
 	return s.PortConnectorInformationStructure
 }
 

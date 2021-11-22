@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // CacheInformationStructure represents the SMBIOS cache information structure.
 type CacheInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // CacheInformation returns a `CacheInformationStructure`.
-func (s SMBIOS) CacheInformation() CacheInformationStructure {
+func (s *SMBIOS) CacheInformation() CacheInformationStructure {
 	return s.CacheInformationStructure
 }
 

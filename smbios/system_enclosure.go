@@ -8,7 +8,7 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // SystemEnclosureStructure represents the system enclosure structure.
 type SystemEnclosureStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // SystemEnclosure returns a `SystemEnclosure`.

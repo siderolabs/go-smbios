@@ -173,11 +173,11 @@ func (m MemoryArrayMemoryErrorCorrection) String() string {
 
 // PhysicalMemoryArrayStructure represents the SMBIOS physical memory array structure.
 type PhysicalMemoryArrayStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // PhysicalMemoryArray returns a `PhysicalMemoryArrayStructure`.
-func (s SMBIOS) PhysicalMemoryArray() PhysicalMemoryArrayStructure {
+func (s *SMBIOS) PhysicalMemoryArray() PhysicalMemoryArrayStructure {
 	return s.PhysicalMemoryArrayStructure
 }
 

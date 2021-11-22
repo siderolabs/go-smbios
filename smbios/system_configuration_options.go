@@ -8,10 +8,10 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // SystemConfigurationOptionsStructure  represents the SMBIOS system configuration options structure.
 type SystemConfigurationOptionsStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // SystemConfigurationOptions returns a `SystemConfigurationOptionsStructure`.
-func (s SMBIOS) SystemConfigurationOptions() SystemConfigurationOptionsStructure {
+func (s *SMBIOS) SystemConfigurationOptions() SystemConfigurationOptionsStructure {
 	return s.SystemConfigurationOptionsStructure
 }

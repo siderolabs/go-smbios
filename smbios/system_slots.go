@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // SystemSlotsStructure represents the SMBIOS systems slots structure.
 type SystemSlotsStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // SystemSlots returns a `SystemSlotsStructure`.
-func (s SMBIOS) SystemSlots() SystemSlotsStructure {
+func (s *SMBIOS) SystemSlots() SystemSlotsStructure {
 	return s.SystemSlotsStructure
 }
 

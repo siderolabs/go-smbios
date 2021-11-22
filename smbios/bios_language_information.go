@@ -8,11 +8,11 @@ import "github.com/digitalocean/go-smbios/smbios"
 
 // BIOSLanguageInformationStructure represents the SMBIOS BIOS language information structure.
 type BIOSLanguageInformationStructure struct {
-	smbios.Structure
+	*smbios.Structure
 }
 
 // BIOSLanguageInformation returns a `BIOSLanguageInformationStructure`.
-func (s SMBIOS) BIOSLanguageInformation() BIOSLanguageInformationStructure {
+func (s *SMBIOS) BIOSLanguageInformation() BIOSLanguageInformationStructure {
 	return s.BIOSLanguageInformationStructure
 }
 
