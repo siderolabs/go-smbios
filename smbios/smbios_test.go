@@ -5,8 +5,8 @@
 package smbios_test
 
 import (
-	"errors"
-	"io/fs"
+	"encoding/json"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -14,16 +14,44 @@ import (
 	"github.com/talos-systems/go-smbios/smbios"
 )
 
-func TestNodeUUID(t *testing.T) {
-	s, err := smbios.New()
-	if err != nil {
-		if errors.Is(err, fs.ErrNotExist) || errors.Is(err, fs.ErrPermission) {
-			t.Skip("SMBIOS information is not available")
-		}
-	}
+func TestASRockSingleRyzen(t *testing.T) {
+	DoTestDesktopManagementInterface(t, "ASRock-Single-Ryzen")
+}
 
-	require.NoError(t, err)
+func TestDellPowerEdgeR630DualXeon(t *testing.T) {
+	DoTestDesktopManagementInterface(t, "Dell-PowerEdge-R630-Dual-Xeon")
+}
 
-	_, err = s.SystemInformation().UUID()
-	require.NoError(t, err)
+func TestDellSuperMicroDualXeon(t *testing.T) {
+	DoTestDesktopManagementInterface(t, "SuperMicro-Dual-Xeon")
+}
+
+func TestDellSuperMicroQuadOpteron(t *testing.T) {
+	DoTestDesktopManagementInterface(t, "SuperMicro-Quad-Opteron")
+}
+
+func DoTestDesktopManagementInterface(t *testing.T, name string) {
+	t.Run(name, func(t *testing.T) {
+		stream, err := os.Open("testdata/" + name + ".dmi")
+		require.NoError(t, err)
+
+		//nolint: errcheck
+		defer stream.Close()
+
+		version := smbios.Version{Major: 3, Minor: 3, Revision: 0} // dummy version
+		actual, err := smbios.Decode(stream, version)
+		require.NoError(t, err)
+
+		expectedJSON, err := os.ReadFile("testdata/" + name + ".json")
+		require.NoError(t, err)
+
+		var expected smbios.SMBIOS
+
+		require.NoError(t, json.Unmarshal(expectedJSON, &expected))
+
+		// remove parsed structures as they are not in JSON
+		actual.Structures = nil
+
+		require.Equal(t, &expected, actual)
+	})
 }

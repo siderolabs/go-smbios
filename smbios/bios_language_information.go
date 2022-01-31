@@ -6,17 +6,18 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// BIOSLanguageInformationStructure represents the SMBIOS BIOS language information structure.
-type BIOSLanguageInformationStructure struct {
-	*smbios.Structure
+// BIOSLanguageInformation represents the SMBIOS BIOS language information.
+type BIOSLanguageInformation struct {
+	// CurrentLanguage returns the current language.
+	CurrentLanguage string
+	// InstallableLanguages returns the installable languages.
+	InstallableLanguages []string
 }
 
-// BIOSLanguageInformation returns a `BIOSLanguageInformationStructure`.
-func (s *SMBIOS) BIOSLanguageInformation() BIOSLanguageInformationStructure {
-	return s.BIOSLanguageInformationStructure
-}
-
-// CurrentLanguage returns the current language.
-func (s BIOSLanguageInformationStructure) CurrentLanguage() string {
-	return get(s.Structure, 0)
+// NewBIOSLanguageInformation initializes and returns a new `BIOSLanguageInformation`.
+func NewBIOSLanguageInformation(s *smbios.Structure) *BIOSLanguageInformation {
+	return &BIOSLanguageInformation{
+		CurrentLanguage:      GetStringOrEmpty(s, 0x15),
+		InstallableLanguages: GetStrings(s),
+	}
 }

@@ -6,48 +6,104 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// BaseboardInformationStructure represents the SMBIOS baseboard information structure.
-type BaseboardInformationStructure struct {
-	*smbios.Structure
+// BaseboardInformation represents the SMBIOS baseboard information.
+type BaseboardInformation struct {
+	// Manufacturer returns the baseboard manufacturer.
+	Manufacturer string
+	// Product returns the baseboard product.
+	Product string
+	// Version returns the baseboard version.
+	Version string
+	// SerialNumber returns the baseboard serial number.
+	SerialNumber string
+	// AssetTag returns the baseboard asset tag.
+	AssetTag string
+	// LocationInChassis returns the number of a null-terminated string that
+	// describes this board's location within the chassis referenced by the
+	// Chassis Handle (described below in this table)
+	// NOTE: This field supports a CIM_Container class mapping where:
+	// 	- LocationWithinContainer is this field.
+	// 	- GroupComponent is the chassis referenced by Chassis Handle.
+	// 	- PartComponent is this baseboard
+	LocationInChassis string
+	// BoardType identifies the type of board. See 7.3.2.
+	BoardType BoardType
 }
 
-// BaseboardInformation returns a `BaseboardInformationStructure`.
-func (s *SMBIOS) BaseboardInformation() BaseboardInformationStructure {
-	return s.BaseboardInformationStructure
+// NewBaseboardInformation initializes and returns a new `BaseboardInformation`.
+func NewBaseboardInformation(s *smbios.Structure) *BaseboardInformation {
+	return &BaseboardInformation{
+		Manufacturer:      GetStringOrEmpty(s, 0x04),
+		Product:           GetStringOrEmpty(s, 0x05),
+		Version:           GetStringOrEmpty(s, 0x06),
+		SerialNumber:      GetStringOrEmpty(s, 0x07),
+		AssetTag:          GetStringOrEmpty(s, 0x08),
+		LocationInChassis: GetStringOrEmpty(s, 0x0A),
+		BoardType:         BoardType(GetByte(s, 0x0D)),
+	}
 }
 
-// Manufacturer returns the baseboard manufacturer.
-func (s BaseboardInformationStructure) Manufacturer() string {
-	return get(s.Structure, 0)
-}
+// BoardType defines the board type enum.
+type BoardType int
 
-// Product returns the baseboard product.
-func (s BaseboardInformationStructure) Product() string {
-	return get(s.Structure, 1)
-}
+const (
+	// BoardTypeUnknown is a board type.
+	BoardTypeUnknown BoardType = iota
+	// BoardTypeOther is a board type.
+	BoardTypeOther
+	// BoardTypeServerBlade is a board type.
+	BoardTypeServerBlade
+	// BoardTypeConnectivitySwitch is a board type.
+	BoardTypeConnectivitySwitch
+	// BoardTypeSystemManagementModule is a board type.
+	BoardTypeSystemManagementModule
+	// BoardTypeProcessorModule is a board type.
+	BoardTypeProcessorModule
+	// BoardTypeIOModule is a board type.
+	BoardTypeIOModule
+	// BoardTypeMemoryModule is a board type.
+	BoardTypeMemoryModule
+	// BoardTypeDaughterBoard is a board type.
+	BoardTypeDaughterBoard
+	// BoardTypeMotherboard is a board type.
+	BoardTypeMotherboard
+	// BoardTypeProcessorMemoryModule is a board type.
+	BoardTypeProcessorMemoryModule
+	// BoardTypeProcessorIOModule is a board type.
+	BoardTypeProcessorIOModule
+	// BoardTypeInterconnectBoard is a board type.
+	BoardTypeInterconnectBoard
+)
 
-// Version returns the baseboard version.
-func (s BaseboardInformationStructure) Version() string {
-	return get(s.Structure, 2)
-}
+func (w BoardType) String() string {
+	switch w {
+	case BoardTypeUnknown:
+		return _Unknown
+	case BoardTypeOther:
+		return _Other
+	case BoardTypeServerBlade:
+		return "Server Blade"
+	case BoardTypeConnectivitySwitch:
+		return "Connectivity Switch"
+	case BoardTypeSystemManagementModule:
+		return "System Management Module"
+	case BoardTypeProcessorModule:
+		return "Processor Module"
+	case BoardTypeIOModule:
+		return "I/O Module"
+	case BoardTypeMemoryModule:
+		return "Memory Module"
+	case BoardTypeDaughterBoard:
+		return "Daughter board"
+	case BoardTypeMotherboard:
+		return "Motherboard (includes processor, memory, and I/O)"
+	case BoardTypeProcessorMemoryModule:
+		return "Processor/Memory Module"
+	case BoardTypeProcessorIOModule:
+		return "Processor/IO Module"
+	case BoardTypeInterconnectBoard:
+		return "Interconnect Board"
+	}
 
-// SerialNumber returns the baseboard serial number.
-func (s BaseboardInformationStructure) SerialNumber() string {
-	return get(s.Structure, 3)
-}
-
-// AssetTag returns the baseboard asset tag.
-func (s BaseboardInformationStructure) AssetTag() string {
-	return get(s.Structure, 4)
-}
-
-// LocationInChassis returns the number of a null-terminated string that
-// describes this board's location within the chassis referenced by the
-// Chassis Handle (described below in this table)
-// NOTE: This field supports a CIM_Container class mapping where:
-// 	- LocationWithinContainer is this field.
-// 	- GroupComponent is the chassis referenced by Chassis Handle.
-// 	- PartComponent is this baseboard
-func (s BaseboardInformationStructure) LocationInChassis() string {
-	return get(s.Structure, 5)
+	return _Unknown
 }

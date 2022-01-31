@@ -5,21 +5,160 @@
 package smbios
 
 import (
-	"encoding/binary"
 	"fmt"
 	"strconv"
 
 	"github.com/digitalocean/go-smbios/smbios"
 )
 
-// MemoryDeviceStructure represents the SMBIOS memory device structure.
-type MemoryDeviceStructure struct {
-	*smbios.Structure
+// MemoryDevice represents a SMBIOS memory device.
+//
+//nolint:govet
+type MemoryDevice struct {
+	// PhysicalMemoryArrayHandle is the handle, or instance number, associated with
+	// the Physical Memory Array to which this device belongs.
+	PhysicalMemoryArrayHandle PhysicalMemoryArrayHandle
+	// MemoryErrorInformationHandle is the handle, or instance number, associated with
+	// any error that was previously detected for the
+	// device. if the system does not provide the error
+	// information structure, the field contains FFFEh;
+	// otherwise, the field contains either FFFFh (if no
+	// error was detected) or the handle of the error information structure.
+	// See 7.18.4 and 7.34.
+	MemoryErrorInformationHandle MemoryErrorInformationHandle
+	// TotalWidth is the total width, in bits, of this memory device,
+	// including any check or error-correction bits. If there
+	// are no error-correction bits, this value should be
+	// equal to Data Width. If the width is unknown, the
+	// field is set to FFFFh.
+	TotalWidth MemoryDeviceWidth
+	// DataWidth is the data width, in bits, of this memory device. A
+	// Data Width of 0 and a Total Width of 8 indicates that
+	// the device is being used solely to provide 8 error correction bits.
+	//  If the width is unknown, the field is set to FFFFh.
+	DataWidth MemoryDeviceWidth
+	// Size is the size of the memory device. If the value is 0, no
+	// memory device is installed in the socket; if the size
+	// is unknown, the field value is FFFFh. If the size is
+	// 32 GB-1 MB or greater, the field value is 7FFFh and
+	// the actual size is stored in the Extended Size field.
+	// The granularity in which the value is specified
+	// depends on the setting of the most-significant bit (bit
+	// 15). If the bit is 0, the value is specified in megabyte
+	// units; if the bit is 1, the value is specified in kilobyte
+	// units. For example, the value 8100h identifies a
+	// 256 KB memory device and 0100h identifies a
+	// 256 MB memory device.
+	Size MemoryDeviceSize
+	// FormFactor is the implementation form factor for this memory
+	// device. See 7.18.1 for definitions.
+	FormFactor FormFactor
+	// DeviceSet identifies when the Memory Device is one of a set
+	// of Memory Devices that must be populated with all
+	// devices of the same type and size, and the set to
+	// which this device belongs. A value of 0 indicates
+	// that the device is not part of a set; a value of FFh
+	// indicates that the attribute is unknown.
+	// NOTE: A Device Set number must be unique within the
+	// context of the Memory Array containing this Memory
+	// Device.
+	DeviceSet string
+	// DeviceLocator is the string number of the string that identifies the
+	// physically-labeled socket or board position where
+	// the memory device is located
+	// EXAMPLE: “SIMM 3”.
+	DeviceLocator string
+	// BankLocator is the string number of the string that identifies the
+	// physically labeled bank where the memory device is
+	// located,
+	// EXAMPLE: “Bank 0” or “A”.
+	BankLocator string
+	// MemoryType is the type of memory used in this device; see 7.18.2
+	// for definitions.
+	MemoryType MemoryType
+	// TypeDetail is additional detail on the memory device type; see
+	// 7.18.3 for definitions.
+	TypeDetail TypeDetail
+	// Speed identifies the maximum capable speed of the
+	// device, in megatransfers per second (MT/s). See
+	// 7.18.4 for details.
+	// 0000h = the speed is unknown
+	// FFFFh = the speed is 65,535 MT/s or greater,
+	// and the actual speed is stored in the Extended
+	// Speed field.
+	Speed MemoryDeviceSpeed
+	// Manufacturer is the string number for the manufacturer of this memory
+	// device.
+	Manufacturer string
+	// SerialNumber is the string number for the serial number of this memory
+	// device.
+	// This value is set by the manufacturer and normally
+	// is not changeable.
+	SerialNumber string
+	// AssetTag is the string number for the asset tag of this memory
+	// device.
+	AssetTag string
+	// PartNumber is the string number for the part number of this memory
+	// device.
+	// This value is set by the manufacturer and normally
+	// is not changeable.
+	PartNumber string
+	// Attributes returns the memory device attributes.
+	Attributes uint8
+	// ExtendedSize returns the memory device extended size.
+	// The Extended Size field is intended to represent memory devices larger than 32,767 MB (32 GB - 1 MB),
+	// which cannot be described using the Size field. This field is only meaningful if the value in the Size field
+	// is 7FFFh. For compatibility with older SMBIOS parsers, memory devices smaller than (32 GB - 1 MB)
+	// should be represented using their size in the Size field, leaving the Extended Size field set to 0.
+	// Bit 31 is reserved for future use and must be set to 0.
+	// Bits 30:0 represent the size of the memory device in megabytes.
+	// Example: 0000_8000h indicates a 32 GB memory device (32,768 MB), 0002_0000h represent
+	ExtendedSize MemoryDeviceExtendedSize
+	// ConfiguredMemorySpeed identifies the configured speed of the memory
+	// device, in megatransfers per second (MT/s). See
+	// 7.18.4 for details.
+	// 0000h = the speed is unknown
+	// FFFFh = the speed is 65,535 MT/s or greater,
+	// and the actual speed is stored in the Extended
+	// Configured Memory Speed field.
+	ConfiguredMemorySpeed MemoryDeviceSpeed
+	// MinimumVoltage is the minimum operating voltage for this device, in millivolts
+	// If the value is 0, the voltage is unknown.
+	MinimumVoltage MemoryDeviceVoltage
+	// MaximumVoltage is the maximum operating voltage for this device, in millivolts
+	// If the value is 0, the voltage is unknown.
+	MaximumVoltage MemoryDeviceVoltage
+	// ConfiguredVoltage is the configured voltage for this device, in millivolts
+	// If the value is 0, the voltage is unknown.
+	ConfiguredVoltage MemoryDeviceVoltage
 }
 
-// MemoryDevice returns a `MemoryDeviceStructure`.
-func (s *SMBIOS) MemoryDevice() MemoryDeviceStructure {
-	return s.MemoryDeviceStructure
+// NewMemoryDevice initializes and returns a new `MemoryDevice`.
+func NewMemoryDevice(s *smbios.Structure) *MemoryDevice {
+	return &MemoryDevice{
+		PhysicalMemoryArrayHandle:    PhysicalMemoryArrayHandle(GetWord(s, 0x04)),
+		MemoryErrorInformationHandle: MemoryErrorInformationHandle(GetWord(s, 0x06)),
+		TotalWidth:                   MemoryDeviceWidth(GetWord(s, 0x08)),
+		DataWidth:                    MemoryDeviceWidth(GetWord(s, 0x0A)),
+		Size:                         MemoryDeviceSize(GetWord(s, 0x0C)),
+		FormFactor:                   FormFactor(GetByte(s, 0x0E)),
+		DeviceSet:                    _GetDeviceSet(s, 0x0F),
+		DeviceLocator:                GetStringOrEmpty(s, 0x10),
+		BankLocator:                  GetStringOrEmpty(s, 0x11),
+		MemoryType:                   MemoryType(GetByte(s, 0x12)),
+		TypeDetail:                   TypeDetail(GetByte(s, 0x13)),
+		Speed:                        MemoryDeviceSpeed(GetWord(s, 0x15)),
+		Manufacturer:                 GetStringOrEmpty(s, 0x17),
+		SerialNumber:                 GetStringOrEmpty(s, 0x18),
+		AssetTag:                     GetStringOrEmpty(s, 0x19),
+		PartNumber:                   GetStringOrEmpty(s, 0x1A),
+		Attributes:                   GetByte(s, 0x1B),
+		ExtendedSize:                 MemoryDeviceExtendedSize(GetDWord(s, 0x1C)),
+		ConfiguredMemorySpeed:        MemoryDeviceSpeed(GetWord(s, 0x20)),
+		MinimumVoltage:               MemoryDeviceVoltage(GetWord(s, 0x22)),
+		MaximumVoltage:               MemoryDeviceVoltage(GetWord(s, 0x24)),
+		ConfiguredVoltage:            MemoryDeviceVoltage(GetWord(s, 0x26)),
+	}
 }
 
 // PhysicalMemoryArrayHandle represents the SMBIOS physical memory array handle.
@@ -27,12 +166,6 @@ type PhysicalMemoryArrayHandle uint16
 
 func (p PhysicalMemoryArrayHandle) String() string {
 	return fmt.Sprintf("0x%X", uint16(p))
-}
-
-// PhysicalMemoryArrayHandle is the handle, or instance number, associated with
-// the Physical Memory Array to which this device belongs.
-func (s MemoryDeviceStructure) PhysicalMemoryArrayHandle() PhysicalMemoryArrayHandle {
-	return PhysicalMemoryArrayHandle(binary.LittleEndian.Uint16(s.Formatted[0:2]))
 }
 
 // MemoryErrorInformationHandle represents the SMBIOS memory error information handle.
@@ -51,86 +184,56 @@ func (m MemoryErrorInformationHandle) String() string {
 	return fmt.Sprintf("0x%X", uint16(m))
 }
 
-// MemoryErrorInformationHandle is the handle, or instance number, associated with
-// any error that was previously detected for the
-// device. if the system does not provide the error
-// information structure, the field contains FFFEh;
-// otherwise, the field contains either FFFFh (if no
-// error was detected) or the handle of the errorinformation structure.
-// See 7.18.4 and 7.34.
-func (s MemoryDeviceStructure) MemoryErrorInformationHandle() MemoryErrorInformationHandle {
-	return MemoryErrorInformationHandle(binary.LittleEndian.Uint16(s.Formatted[2:4]))
-}
-
 // MemoryDeviceWidth represents the SMBIOS memory device width.
 type MemoryDeviceWidth uint16
 
 // String returns the string representation of the SMBIOS memory device width.
 func (m MemoryDeviceWidth) String() string {
 	if m == 0xFFFF {
-		return typeUnknown
+		return _Unknown
 	}
 
 	return fmt.Sprintf("%d bits", m)
 }
 
-// TotalWidth is the total width, in bits, of this memory device,
-// including any check or error-correction bits. If there
-// are no error-correction bits, this value should be
-// equal to Data Width. If the width is unknown, the
-// field is set to FFFFh.
-func (s MemoryDeviceStructure) TotalWidth() MemoryDeviceWidth {
-	return MemoryDeviceWidth(binary.LittleEndian.Uint16(s.Formatted[4:6]))
-}
-
-// DataWidth is the data width, in bits, of this memory device. A
-// Data Width of 0 and a Total Width of 8 indicates that
-// the device is being used solely to provide 8 errorcorrection bits.
-//  If the width is unknown, the field is set to FFFFh.
-func (s MemoryDeviceStructure) DataWidth() MemoryDeviceWidth {
-	return MemoryDeviceWidth(binary.LittleEndian.Uint16(s.Formatted[6:8]))
-}
-
 // MemoryDeviceSize represents the SMBIOS memory device size.
 type MemoryDeviceSize uint16
 
-// String returns the string representation fo the SMBIOS memory device size.
+// Megabytes returns the size of the SMBIOS memory device converted to megabytes.
+func (m MemoryDeviceSize) Megabytes() int {
+	if IsNthBitSet(int(m), 15) {
+		return int(m) / 1024
+	}
+
+	return int(m)
+}
+
+// String returns the string representation of the SMBIOS memory device size.
 func (m MemoryDeviceSize) String() string {
 	if m == 0xFFFF {
-		return typeUnknown
+		return _Unknown
 	}
 
 	if m == 0x7FFF {
 		return "See Extended Size"
 	}
 
-	b := bits(int(m))
-
-	units := ""
-
-	if b[15] == 0 {
-		units = "MB"
-	} else if b[15] == 1 {
+	var units string
+	if IsNthBitSet(int(m), 15) {
 		units = "KB"
+	} else {
+		units = "MB"
 	}
 
 	return fmt.Sprintf("%d %s", m, units)
 }
 
-// Size is the size of the memory device. If the value is 0, no
-// memory device is installed in the socket; if the size
-// is unknown, the field value is FFFFh. If the size is
-// 32 GB-1 MB or greater, the field value is 7FFFh and
-// the actual size is stored in the Extended Size field.
-// The granularity in which the value is specified
-// depends on the setting of the most-significant bit (bit
-// 15). If the bit is 0, the value is specified in megabyte
-// units; if the bit is 1, the value is specified in kilobyte
-// units. For example, the value 8100h identifies a
-// 256 KB memory device and 0100h identifies a
-// 256 MB memory device.
-func (s MemoryDeviceStructure) Size() MemoryDeviceSize {
-	return MemoryDeviceSize(binary.LittleEndian.Uint16(s.Formatted[8:10]))
+// MemoryDeviceExtendedSize represents the SMBIOS memory device extended size.
+type MemoryDeviceExtendedSize uint16
+
+// String returns the string representation of the SMBIOS memory device extended size.
+func (m MemoryDeviceExtendedSize) String() string {
+	return fmt.Sprintf("%d MB", m)
 }
 
 // FormFactor represents the SMBIOS memory device form factor.
@@ -171,91 +274,58 @@ const (
 	FormFactorFBDie
 )
 
-const (
-	formFactorOther           = "Other"
-	formFactorUnknown         = "Unknown"
-	formFactorSIMM            = "SIMM"
-	formFactorSIP             = "SIP"
-	formFactorChip            = "Chip"
-	formFactorDIP             = "DIP"
-	formFactorZIP             = "ZIP"
-	formFactorProprietaryCard = "Proprietary Card"
-	formFactorDIMM            = "DIMM"
-	formFactorTSOP            = "TSOP"
-	formFactorRowOfChips      = "Row of chips"
-	formFactorRIMM            = "RIMM"
-	formFactorSODIMM          = "SODIMM"
-	formFactorSRIMM           = "SRIMM"
-	formFactorFBDIMM          = "FB-DIMM"
-	formFactorDie             = "Die"
-)
-
 // String returns the string representation of a form factor.
 func (f FormFactor) String() string {
-	return [...]string{
-		"", // Placeholder since values start at 01h.
-		formFactorOther,
-		formFactorUnknown,
-		formFactorSIMM,
-		formFactorSIP,
-		formFactorChip,
-		formFactorDIP,
-		formFactorZIP,
-		formFactorProprietaryCard,
-		formFactorDIMM,
-		formFactorTSOP,
-		formFactorRowOfChips,
-		formFactorRIMM,
-		formFactorSODIMM,
-		formFactorSRIMM,
-		formFactorFBDIMM,
-		formFactorDie,
-	}[f]
+	switch f {
+	case FormFactorOther:
+		return _Other
+	case FormFactorUnknown:
+		return _Unknown
+	case FormFactorSIMM:
+		return "SIMM"
+	case FormFactorSIP:
+		return "SIP"
+	case FormFactorChip:
+		return "Chip"
+	case FormFactorDIP:
+		return "DIP"
+	case FormFactorZIP:
+		return "ZIP"
+	case FormFactorProprietaryCard:
+		return "Proprietary Card"
+	case FormFactorDIMM:
+		return "DIMM"
+	case FormFactorTSOP:
+		return "TSOP"
+	case FormFactorRowOfChips:
+		return "Row of chips"
+	case FormFactorRIMM:
+		return "RIMM"
+	case FormFactorSODIMM:
+		return "SODIMM"
+	case FormFactorSRIMM:
+		return "SRIMM"
+	case FormFactorFBDIMM:
+		return "FB-DIMM"
+	case FormFactorFBDie:
+		return "Die"
+	}
+
+	return _Unknown
 }
 
-// FormFactor is the implementation form factor for this memory
-// device. See 7.18.1 for definitions.
-func (s MemoryDeviceStructure) FormFactor() FormFactor {
-	return FormFactor(s.Formatted[10])
-}
-
-// DeviceSet identifies when the Memory Device is one of a set
-// of Memory Devices that must be populated with all
-// devices of the same type and size, and the set to
-// which this device belongs. A value of 0 indicates
-// that the device is not part of a set; a value of FFh
-// indicates that the attribute is unknown.
-// NOTE: A Device Set number must be unique within the
-// context of the Memory Array containing this Memory
-// Device.
-func (s MemoryDeviceStructure) DeviceSet() string {
-	b := s.Formatted[11]
+func _GetDeviceSet(s *smbios.Structure, offset int) string {
+	b := GetByte(s, offset)
 
 	if b == 0 {
-		return "None"
+		return _Empty
 	}
 
 	if b == 0xFF {
-		return typeUnknown
+		return _Empty
 	}
 
 	return strconv.FormatInt(int64(b), 10)
-}
-
-// Locator is the string number of the string that identifies the
-// physically-labeled socket or board position where
-// the memory device is located
-// EXAMPLE: “SIMM 3”.
-func (s MemoryDeviceStructure) Locator() string {
-	return get(s.Structure, 0)
-}
-
-// BankLocator is the string number of the string that identifies the
-// physically labeled bank where the memory device is
-// located,
-// EXAMPLE: “Bank 0” or “A”.
-func (s MemoryDeviceStructure) BankLocator() string {
-	return get(s.Structure, 1)
 }
 
 // MemoryType represents the SMBIOS memory device type.
@@ -330,87 +400,79 @@ const (
 	MemoryTypeLPDDR5
 )
 
-const (
-	memoryTypeOther                    = "Other"
-	memoryTypeUnknown                  = "Unknown"
-	memoryTypeDRAM                     = "DRAM"
-	memoryTypeEDRAM                    = "EDRAM"
-	memoryTypeVRAM                     = "VRAM"
-	memoryTypeSRAM                     = "SRAM"
-	memoryTypeRAM                      = "RAM"
-	memoryTypeROM                      = "ROM"
-	memoryTypeFLASH                    = "FLASH"
-	memoryTypeEEPROM                   = "EEPROM"
-	memoryTypeFEPROM                   = "FEPROM"
-	memoryTypeEPROM                    = "EPROM"
-	memoryTypeCDRAM                    = "CDRAM"
-	memoryType3DRAM                    = "3DRAM"
-	memoryTypeSDRAM                    = "SDRAM"
-	memoryTypeSGRAM                    = "SGRAM"
-	memoryTypeRDRAM                    = "RDRAM"
-	memoryTypeDDR                      = "DDR"
-	memoryTypeDDR2                     = "DDR2"
-	memoryTypeDDR2FBDIMM               = "DDR2 FB-DIMM"
-	memoryTypeReserved                 = "Reserved"
-	memoryTypeDDR3                     = "DDR3"
-	memoryTypeFBD2                     = "FBD2"
-	memoryTypeDDR4                     = "DDR4"
-	memoryTypeLPDDR                    = "LPDDR"
-	memoryTypeLPDDR2                   = "LPDDR2"
-	memoryTypeLPDDR3                   = "LPDDR3"
-	memoryTypeLPDDR4                   = "LPDDR4"
-	memoryTypeLogicalNonVolatileDevice = "Logical non-volatile device"
-	memoryTypeHBM                      = "HBM (High Bandwidth Memory)"
-	memoryTypeHBM2                     = "HBM2 (High Bandwidth Memory Generation 2)"
-	memoryTypeDDR5                     = "DDR5"
-	memoryTypeLPDDR5                   = "LPDDR5"
-)
-
+// String returns the string representation of this `MemoryType` enum constant.
+//nolint: gocyclo, cyclop
 func (m MemoryType) String() string {
-	return [...]string{
-		"", // Placeholder since values start at 01h.
-		memoryTypeOther,
-		memoryTypeUnknown,
-		memoryTypeDRAM,
-		memoryTypeEDRAM,
-		memoryTypeVRAM,
-		memoryTypeSRAM,
-		memoryTypeRAM,
-		memoryTypeROM,
-		memoryTypeFLASH,
-		memoryTypeEEPROM,
-		memoryTypeFEPROM,
-		memoryTypeEPROM,
-		memoryTypeCDRAM,
-		memoryType3DRAM,
-		memoryTypeSDRAM,
-		memoryTypeSGRAM,
-		memoryTypeRDRAM,
-		memoryTypeDDR,
-		memoryTypeDDR2,
-		memoryTypeDDR2FBDIMM,
-		memoryTypeReserved, // First reserved byte.
-		memoryTypeReserved, // Second reserved byte.
-		memoryTypeReserved, // Third reserved byte.
-		memoryTypeDDR3,
-		memoryTypeFBD2,
-		memoryTypeDDR4,
-		memoryTypeLPDDR,
-		memoryTypeLPDDR2,
-		memoryTypeLPDDR3,
-		memoryTypeLPDDR4,
-		memoryTypeLogicalNonVolatileDevice,
-		memoryTypeHBM,
-		memoryTypeHBM2,
-		memoryTypeDDR5,
-		memoryTypeLPDDR5,
-	}[m]
-}
+	switch m {
+	case MemoryTypeOther:
+		return _Other
+	case MemoryTypeUnknown:
+		return _Unknown
+	case MemoryTypeDRAM:
+		return "DRAM"
+	case MemoryTypeEDRAM:
+		return "EDRAM"
+	case MemoryTypeVRAM:
+		return "VRAM"
+	case MemoryTypeSRAM:
+		return "SRAM"
+	case MemoryTypeRAM:
+		return "RAM"
+	case MemoryTypeROM:
+		return "ROM"
+	case MemoryTypeFLASH:
+		return "FLASH"
+	case MemoryTypeEEPROM:
+		return "EEPROM"
+	case MemoryTypeFEPROM:
+		return "FEPROM"
+	case MemoryTypeEPROM:
+		return "EPROM"
+	case MemoryTypeCDRAM:
+		return "CDRAM"
+	case MemoryType3DRAM:
+		return "3DRAM"
+	case MemoryTypeSDRAM:
+		return "SDRAM"
+	case MemoryTypeSGRAM:
+		return "SGRAM"
+	case MemoryTypeRDRAM:
+		return "RDRAM"
+	case MemoryTypeDDR:
+		return "DDR"
+	case MemoryTypeDDR2:
+		return "DDR2"
+	case MemoryTypeDDR2FBDIMM:
+		return "DDR2 FB-DIMM"
+	case MemoryTypeReserved:
+		return _Reserved
+	case MemoryTypeDDR3:
+		return "DDR3"
+	case MemoryTypeFBD2:
+		return "FBD2"
+	case MemoryTypeDDR4:
+		return "DDR4"
+	case MemoryTypeLPDDR:
+		return "LPDDR"
+	case MemoryTypeLPDDR2:
+		return "LPDDR2"
+	case MemoryTypeLPDDR3:
+		return "LPDDR3"
+	case MemoryTypeLPDDR4:
+		return "LPDDR4"
+	case MemoryTypeLogicalNonVolatileDevice:
+		return "Logical non-volatile device"
+	case MemoryTypeHBM:
+		return "HBM (High Bandwidth Memory)"
+	case MemoryTypeHBM2:
+		return "HBM2 (High Bandwidth Memory Generation 2)"
+	case MemoryTypeDDR5:
+		return "DDR5"
+	case MemoryTypeLPDDR5:
+		return "LPDDR5"
+	}
 
-// MemoryType is the type of memory used in this device; see 7.18.2
-// for definitions.
-func (s MemoryDeviceStructure) MemoryType() MemoryType {
-	return MemoryType(s.Formatted[14])
+	return _Unknown
 }
 
 // TypeDetail represents the SMBIOS memory device detail.
@@ -454,44 +516,43 @@ const (
 	TypeDetailAttributeReserved
 )
 
-const (
-	typeDetailAttributeLRDIMM       = "LRDIMM"                    // Bit 15
-	typeDetailAttributeUnbuffered   = "Unbuffered (Unregistered)" // Bit 14
-	typeDetailAttributeRegistered   = "Registered (Buffered)"     // Bit 13
-	typeDetailAttributeNonVolatile  = "Non-volatile"              // Bit 12
-	typeDetailAttributeCacheDRAM    = "Cache DRAM"                // Bit 11
-	typeDetailAttributeWindowDRAM   = "Window DRAM"               // Bit 10
-	typeDetailAttributeEDO          = "EDO"                       // Bit 9
-	tTypeDetailAttributeCMOS        = "CMOS"                      // Bit 8
-	typeDetailAttributeSynchronous  = "Synchronous"               // Bit 7
-	typeDetailAttributeRAMBUS       = "RAMBUS"                    // Bit 6
-	typeDetailAttributePseudoStatic = "Pseudo-static"             // Bit 5
-	typeDetailAttributeStaticColumn = "Static column"             // Bit 4
-	typeDetailAttributeFastPaged    = "Fast-paged"                // Bit 3
-	typeDetailAttributeUnknown      = "Unknown"                   // Bit 2
-	typeDetailAttributeOther        = "Other"                     // Bit 1
-	typeDetailAttributeReserved     = "Reserved"                  // Bit 0
-)
-
 func (t TypeDetailAttribute) String() string {
-	return [...]string{
-		typeDetailAttributeLRDIMM,
-		typeDetailAttributeUnbuffered,
-		typeDetailAttributeRegistered,
-		typeDetailAttributeNonVolatile,
-		typeDetailAttributeCacheDRAM,
-		typeDetailAttributeWindowDRAM,
-		typeDetailAttributeEDO,
-		tTypeDetailAttributeCMOS,
-		typeDetailAttributeSynchronous,
-		typeDetailAttributeRAMBUS,
-		typeDetailAttributePseudoStatic,
-		typeDetailAttributeStaticColumn,
-		typeDetailAttributeFastPaged,
-		typeDetailAttributeUnknown,
-		typeDetailAttributeOther,
-		typeDetailAttributeReserved,
-	}[t]
+	switch t {
+	case TypeDetailAttributeLRDIMM:
+		return "LRDIMM" // Bit 15
+	case TypeDetailAttributeUnbuffered:
+		return "Unbuffered (Unregistered)" // Bit 14
+	case TypeDetailAttributeRegistered:
+		return "Registered (Buffered)" // Bit 13
+	case TypeDetailAttributeNonVolatile:
+		return "Non-volatile" // Bit 12
+	case TypeDetailAttributeCacheDRAM:
+		return "Cache DRAM" // Bit 11
+	case TypeDetailAttributeWindowDRAM:
+		return "Window DRAM" // Bit 10
+	case TypeDetailAttributeEDO:
+		return "EDO" // Bit 9
+	case TypeDetailAttributeCMOS:
+		return "CMOS" // Bit 8
+	case TypeDetailAttributeSynchronous:
+		return "Synchronous" // Bit 7
+	case TypeDetailAttributeRAMBUS:
+		return "RAMBUS" // Bit 6
+	case TypeDetailAttributePseudoStatic:
+		return "Pseudo-static" // Bit 5
+	case TypeDetailAttributeStaticColumn:
+		return "Static column" // Bit 4
+	case TypeDetailAttributeFastPaged:
+		return "Fast-paged" // Bit 3
+	case TypeDetailAttributeUnknown:
+		return _Unknown // Bit 2
+	case TypeDetailAttributeOther:
+		return _Other // Bit 1
+	case TypeDetailAttributeReserved:
+		return _Reserved // Bit 0
+	}
+
+	return _Unknown
 }
 
 // Attributes returns the SMBIOS memory device detail attribute.
@@ -527,12 +588,6 @@ func (t TypeDetail) String() string {
 	return s
 }
 
-// TypeDetail is additional detail on the memory device type; see
-// 7.18.3 for definitions.
-func (s MemoryDeviceStructure) TypeDetail() TypeDetail {
-	return TypeDetail(binary.LittleEndian.Uint16(s.Formatted[15:17]))
-}
-
 // MemoryDeviceSpeed represents the SMBIOS memory device speed.
 type MemoryDeviceSpeed uint16
 
@@ -540,98 +595,15 @@ func (m MemoryDeviceSpeed) String() string {
 	return fmt.Sprintf("%d MT/s", m)
 }
 
-// Speed identifies the maximum capable speed of the
-// device, in megatransfers per second (MT/s). See
-// 7.18.4 for details.
-// 0000h = the speed is unknown
-// FFFFh = the speed is 65,535 MT/s or greater,
-// and the actual speed is stored in the Extended
-// Speed field.
-func (s MemoryDeviceStructure) Speed() MemoryDeviceSpeed {
-	return MemoryDeviceSpeed(binary.LittleEndian.Uint16(s.Formatted[17:19]))
-}
-
-// Manufacturer is the string number for the manufacturer of this memory
-// device.
-func (s MemoryDeviceStructure) Manufacturer() string {
-	return get(s.Structure, 2)
-}
-
-// SerialNumber is the string number for the serial number of this memory
-// device.
-// This value is set by the manufacturer and normally
-// is not changeable.
-func (s MemoryDeviceStructure) SerialNumber() string {
-	return get(s.Structure, 3)
-}
-
-// AssetTag is the string number for the asset tag of this memory
-// device.
-func (s MemoryDeviceStructure) AssetTag() string {
-	return get(s.Structure, 4)
-}
-
-// PartNumber is the string number for the part number of this memory
-// device.
-// This value is set by the manufacturer and normally
-// is not changeable.
-func (s MemoryDeviceStructure) PartNumber() string {
-	return get(s.Structure, 5)
-}
-
-// Attributes returns the memory device attributes.
-func (s MemoryDeviceStructure) Attributes() {}
-
-// ExtendedSize returns the memory device extended size.
-func (s MemoryDeviceStructure) ExtendedSize() {}
-
-// ConfiguredMemorySpeed represents the SMBIOS memory device configured speed.
-type ConfiguredMemorySpeed uint16
-
-func (c ConfiguredMemorySpeed) String() string {
-	return fmt.Sprintf("%d MT/s", c)
-}
-
-// ConfiguredMemorySpeed identifies the configured speed of the memory
-// device, in megatransfers per second (MT/s). See
-// 7.18.4 for details.
-// 0000h = the speed is unknown
-// FFFFh = the speed is 65,535 MT/s or greater,
-// and the actual speed is stored in the Extended
-// Configured Memory Speed field.
-func (s MemoryDeviceStructure) ConfiguredMemorySpeed() ConfiguredMemorySpeed {
-	return ConfiguredMemorySpeed(binary.LittleEndian.Uint16(s.Formatted[28:30]))
-}
-
 // MemoryDeviceVoltage represents the SMBIOS memory device voltage.
 type MemoryDeviceVoltage uint16
 
 func (m MemoryDeviceVoltage) String() string {
 	if m == 0 {
-		return "Unknown"
+		return _Unknown
 	}
 
 	return fmt.Sprintf("%.2f V", float32(m)/1000)
-}
-
-// MinimumVoltage is the minimum operating voltage for this device, in
-// millivolts
-// If the value is 0, the voltage is unknown.
-func (s MemoryDeviceStructure) MinimumVoltage() MemoryDeviceVoltage {
-	return MemoryDeviceVoltage(binary.LittleEndian.Uint16(s.Formatted[30:32]))
-}
-
-// MaximumVoltage is the maximum operating voltage for this device, in
-// millivolts
-// If the value is 0, the voltage is unknown.
-func (s MemoryDeviceStructure) MaximumVoltage() MemoryDeviceVoltage {
-	return MemoryDeviceVoltage(binary.LittleEndian.Uint16(s.Formatted[32:34]))
-}
-
-// ConfiguredVoltage is the configured voltage for this device, in millivolts
-// If the value is 0, the voltage is unknown.
-func (s MemoryDeviceStructure) ConfiguredVoltage() MemoryDeviceVoltage {
-	return MemoryDeviceVoltage(binary.LittleEndian.Uint16(s.Formatted[34:36]))
 }
 
 func bits(input int) []int {

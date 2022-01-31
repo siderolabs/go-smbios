@@ -6,27 +6,21 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// BIOSInformationStructure represents the BIOS information structure.
-type BIOSInformationStructure struct {
-	*smbios.Structure
+// BIOSInformation represents the BIOS information.
+type BIOSInformation struct {
+	// Vendor returns the BIOS vendor.
+	Vendor string
+	// Version returns the BIOS version.
+	Version string
+	// ReleaseDate returns the BIOS release date.
+	ReleaseDate string
 }
 
-// BIOSInformation returns a `BIOSInformationStructure`.
-func (s SMBIOS) BIOSInformation() BIOSInformationStructure {
-	return s.BIOSInformationStructure
-}
-
-// Vendor returns the BIOS vendor.
-func (s BIOSInformationStructure) Vendor() string {
-	return get(s.Structure, 0)
-}
-
-// Version returns the BIOS version.
-func (s BIOSInformationStructure) Version() string {
-	return get(s.Structure, 1)
-}
-
-// ReleaseDate returns the BIOS release date.
-func (s BIOSInformationStructure) ReleaseDate() string {
-	return get(s.Structure, 2)
+// NewBIOSInformation initializes and returns a new `BIOSInformation`.
+func NewBIOSInformation(s *smbios.Structure) *BIOSInformation {
+	return &BIOSInformation{
+		GetStringOrEmpty(s, 0x04),
+		GetStringOrEmpty(s, 0x05),
+		GetStringOrEmpty(s, 0x08),
+	}
 }

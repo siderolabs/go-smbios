@@ -1,0 +1,611 @@
+{
+	"Version": {
+		"Major": 3,
+		"Minor": 3,
+		"Revision": 0
+	},
+	"BIOSInformation": {
+		"Vendor": "American Megatrends Inc.",
+		"Version": "3.0c",
+		"ReleaseDate": "03/24/2014"
+	},
+	"SystemInformation": {
+		"Manufacturer": "Supermicro",
+		"ProductName": "SYS-1027R-WRF",
+		"Version": "0123456789",
+		"SerialNumber": "E09626824801435",
+		"UUID": "00000000-0000-0000-0000-002590eb9628",
+		"WakeUpType": 6,
+		"SKUNumber": "",
+		"Family": ""
+	},
+	"BaseboardInformation": {
+		"Manufacturer": "Supermicro",
+		"Product": "X9DRW",
+		"Version": "0123456789",
+		"SerialNumber": "VM145S005223",
+		"AssetTag": "",
+		"LocationInChassis": "",
+		"BoardType": 10
+	},
+	"SystemEnclosure": {
+		"Manufacturer": "Supermicro",
+		"Version": "0123456789",
+		"SerialNumber": "C1130LC49MH0061",
+		"AssetTagNumber": "",
+		"SKUNumber": ""
+	},
+	"ProcessorInformation": [
+		{
+			"SocketDesignation": "CPU 1",
+			"ProcessorManufacturer": "Intel",
+			"ProcessorVersion": "Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz",
+			"MaxSpeed": 4000,
+			"CurrentSpeed": 2600,
+			"Status": 65,
+			"SerialNumber": "",
+			"AssetTag": "3A65E8E29D76BF8D",
+			"PartNumber": "",
+			"CoreCount": 8,
+			"CoreEnabled": 8,
+			"ThreadCount": 16
+		},
+		{
+			"SocketDesignation": "CPU 2",
+			"ProcessorManufacturer": "Intel",
+			"ProcessorVersion": "Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz",
+			"MaxSpeed": 4000,
+			"CurrentSpeed": 2600,
+			"Status": 65,
+			"SerialNumber": "",
+			"AssetTag": "",
+			"PartNumber": "",
+			"CoreCount": 8,
+			"CoreEnabled": 8,
+			"ThreadCount": 16
+		}
+	],
+	"CacheInformation": [
+		{
+			"SocketDesignation": "L1 Cache"
+		},
+		{
+			"SocketDesignation": "L2 Cache"
+		},
+		{
+			"SocketDesignation": "L3 Cache"
+		},
+		{
+			"SocketDesignation": "L1 Cache"
+		},
+		{
+			"SocketDesignation": "L2 Cache"
+		},
+		{
+			"SocketDesignation": "L3 Cache"
+		}
+	],
+	"PortConnectorInformation": [
+		{
+			"InternalReferenceDesignator": "J1A1",
+			"ExternalReferenceDesignator": "PS2Mouse"
+		},
+		{
+			"InternalReferenceDesignator": "J1A1",
+			"ExternalReferenceDesignator": "Keyboard"
+		},
+		{
+			"InternalReferenceDesignator": "J2A1",
+			"ExternalReferenceDesignator": "TV Out"
+		},
+		{
+			"InternalReferenceDesignator": "J2A2A",
+			"ExternalReferenceDesignator": "COM A"
+		},
+		{
+			"InternalReferenceDesignator": "J2A2B",
+			"ExternalReferenceDesignator": "Video"
+		},
+		{
+			"InternalReferenceDesignator": "J3A1",
+			"ExternalReferenceDesignator": "USB1"
+		},
+		{
+			"InternalReferenceDesignator": "J3A1",
+			"ExternalReferenceDesignator": "USB2"
+		},
+		{
+			"InternalReferenceDesignator": "J3A1",
+			"ExternalReferenceDesignator": "USB3"
+		},
+		{
+			"InternalReferenceDesignator": "J11 - USB2/3",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "J12 - USB4/5",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "J13 - USB6",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "JTPM1 - TPM HDR",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "JCOM2 - COM 2",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "JVGA2",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FAN1",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FAN2",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FAN3",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FAN4",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FAN5",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "FANA",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "SAS0~3",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "SAS4~7",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "SATA0",
+			"ExternalReferenceDesignator": ""
+		},
+		{
+			"InternalReferenceDesignator": "SATA1",
+			"ExternalReferenceDesignator": ""
+		}
+	],
+	"SystemSlots": [
+		{
+			"SlotDesignation": "RSC-R1UW-2E16 SLOT1 PCI-E x16"
+		},
+		{
+			"SlotDesignation": "RSC-R1UW-2E16 SLOT2 PCI-E x16"
+		}
+	],
+	"OEMStrings": {
+		"Count": 2,
+		"Strings": [
+			"Intel SandyBridge/Patsburg/Romley",
+			"Supermicro motherboard-X9 Series "
+		]
+	},
+	"SystemConfigurationOptions": {
+		"Count": 1,
+		"Strings": [
+			"To Be Filled By O.E.M."
+		]
+	},
+	"BIOSLanguageInformation": {
+		"CurrentLanguage": "en|US|iso8859-1",
+		"InstallableLanguages": [
+			"en|US|iso8859-1"
+		]
+	},
+	"GroupAssociations": {
+		"GroupName": ""
+	},
+	"PhysicalMemoryArray": {
+		"Location": 3,
+		"Use": 3,
+		"MemoryErrorCorrection": 6,
+		"MaximumCapacity": 134217728,
+		"MemoryErrorInformationHandle": 65534,
+		"NumberOfMemoryDevices": 8,
+		"ExtendedMaximumCapacity": 0
+	},
+	"MemoryDevices": [
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMA1",
+			"BankLocator": "P0_Node0_Channel0_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Micron",
+			"SerialNumber": "346C4A12",
+			"AssetTag": "Dimm0_AssetTag",
+			"PartNumber": "18KSF51272PZ-1G4K",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMA2",
+			"BankLocator": "P0_Node0_Channel0_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "D2166C8B",
+			"AssetTag": "Dimm1_AssetTag",
+			"PartNumber": "HP647647-071-HYE",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMB1",
+			"BankLocator": "P0_Node0_Channel1_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Micron",
+			"SerialNumber": "346C4A0C",
+			"AssetTag": "Dimm2_AssetTag",
+			"PartNumber": "18KSF51272PZ-1G4K",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMB2",
+			"BankLocator": "P0_Node0_Channel1_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "4219C94A",
+			"AssetTag": "Dimm3_AssetTag",
+			"PartNumber": "HP647647-071-HYE",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMC1",
+			"BankLocator": "P0_Node0_Channel2_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "CB16BE85",
+			"AssetTag": "Dimm4_AssetTag",
+			"PartNumber": "HP647647-071-HYE",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMC2",
+			"BankLocator": "P0_Node0_Channel2_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Hynix Semiconductor",
+			"SerialNumber": "40037599",
+			"AssetTag": "Dimm5_AssetTag",
+			"PartNumber": "HMT351R7EFR4A-H9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMD1",
+			"BankLocator": "P0_Node0_Channel3_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Hynix Semiconductor",
+			"SerialNumber": "2E5B6FC2",
+			"AssetTag": "Dimm6_AssetTag",
+			"PartNumber": "HMT351R7CFR4A-H9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 59,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P1-DIMMD2",
+			"BankLocator": "P0_Node0_Channel3_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Hynix Semiconductor",
+			"SerialNumber": "4450CF8D",
+			"AssetTag": "Dimm7_AssetTag",
+			"PartNumber": "HMT351R7CFR4A-H9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMME1",
+			"BankLocator": "P1_Node1_Channel0_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Hynix Semiconductor",
+			"SerialNumber": "2B58ED66",
+			"AssetTag": "Dimm0_AssetTag",
+			"PartNumber": "HMT351R7CFR4A-H9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMME2",
+			"BankLocator": "P1_Node1_Channel0_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Samsung",
+			"SerialNumber": "87019215",
+			"AssetTag": "Dimm1_AssetTag",
+			"PartNumber": "M393B5270DH0-YH9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMF1",
+			"BankLocator": "P1_Node1_Channel1_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Micron",
+			"SerialNumber": "D97589D0",
+			"AssetTag": "Dimm2_AssetTag",
+			"PartNumber": "18KSF51272PZ-1G4K",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMF2",
+			"BankLocator": "P1_Node1_Channel1_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Hynix Semiconductor",
+			"SerialNumber": "40037581",
+			"AssetTag": "Dimm3_AssetTag",
+			"PartNumber": "HMT351R7EFR4A-H9",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMG1",
+			"BankLocator": "P1_Node1_Channel2_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Micron",
+			"SerialNumber": "346C4A0E",
+			"AssetTag": "Dimm4_AssetTag",
+			"PartNumber": "18KSF51272PZ-1G4K",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMG2",
+			"BankLocator": "P1_Node1_Channel2_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "4419A849",
+			"AssetTag": "Dimm5_AssetTag",
+			"PartNumber": "HP647647-071-HYE",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMH1",
+			"BankLocator": "P1_Node1_Channel3_Dimm0",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Micron",
+			"SerialNumber": "E61E68CB",
+			"AssetTag": "Dimm6_AssetTag",
+			"PartNumber": "18KSF51272PZ-1G4K",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 77,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 72,
+			"DataWidth": 64,
+			"Size": 4096,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "P2-DIMMH2",
+			"BankLocator": "P1_Node1_Channel3_Dimm1",
+			"MemoryType": 24,
+			"TypeDetail": 0,
+			"Speed": 1333,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "D216678B",
+			"AssetTag": "Dimm7_AssetTag",
+			"PartNumber": "HP647647-071-HYE",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 1333,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		}
+	]
+}

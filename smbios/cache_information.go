@@ -6,17 +6,15 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// CacheInformationStructure represents the SMBIOS cache information structure.
-type CacheInformationStructure struct {
-	*smbios.Structure
+// CacheInformation represents the SMBIOS cache information.
+type CacheInformation struct {
+	// SocketDesignation returns the cache socket designation.
+	SocketDesignation string
 }
 
-// CacheInformation returns a `CacheInformationStructure`.
-func (s *SMBIOS) CacheInformation() CacheInformationStructure {
-	return s.CacheInformationStructure
-}
-
-// SocketDesignation returns the cache socket designation.
-func (s CacheInformationStructure) SocketDesignation() string {
-	return get(s.Structure, 0)
+// NewCacheInformation initializes and returns a new `CacheInformation`.
+func NewCacheInformation(s *smbios.Structure) *CacheInformation {
+	return &CacheInformation{
+		SocketDesignation: GetStringOrEmpty(s, 0x04),
+	}
 }

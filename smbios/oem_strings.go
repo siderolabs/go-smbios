@@ -6,12 +6,18 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// OEMStringsStructure represents the SMBIOS OEM strings structure.
-type OEMStringsStructure struct {
-	*smbios.Structure
+// OEMStrings represents the SMBIOS OEM strings.
+type OEMStrings struct {
+	// Strings returns the actual strings.
+	Strings []string
+	// Count return the number of strings
+	Count uint8
 }
 
-// OEMStrings returns the OEM strings.
-func (s SMBIOS) OEMStrings() OEMStringsStructure {
-	return s.OEMStringsStructure
+// NewOEMStrings initializes and returns a new `OEMStrings`.
+func NewOEMStrings(s *smbios.Structure) *OEMStrings {
+	return &OEMStrings{
+		Count:   GetByte(s, 0x04),
+		Strings: GetStrings(s),
+	}
 }

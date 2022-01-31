@@ -6,12 +6,18 @@ package smbios
 
 import "github.com/digitalocean/go-smbios/smbios"
 
-// SystemConfigurationOptionsStructure  represents the SMBIOS system configuration options structure.
-type SystemConfigurationOptionsStructure struct {
-	*smbios.Structure
+// SystemConfigurationOptions represents the SMBIOS system configuration options.
+type SystemConfigurationOptions struct {
+	// Strings returns the actual strings.
+	Strings []string
+	// Count return the number of strings
+	Count uint8
 }
 
-// SystemConfigurationOptions returns a `SystemConfigurationOptionsStructure`.
-func (s *SMBIOS) SystemConfigurationOptions() SystemConfigurationOptionsStructure {
-	return s.SystemConfigurationOptionsStructure
+// NewSystemConfigurationOptions initializes and returns a new `SystemConfigurationOptions`.
+func NewSystemConfigurationOptions(s *smbios.Structure) *SystemConfigurationOptions {
+	return &SystemConfigurationOptions{
+		Count:   GetByte(s, 0x04),
+		Strings: GetStrings(s),
+	}
 }

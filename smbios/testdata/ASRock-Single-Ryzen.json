@@ -1,0 +1,193 @@
+{
+	"Version": {
+		"Major": 3,
+		"Minor": 3,
+		"Revision": 0
+	},
+	"BIOSInformation": {
+		"Vendor": "American Megatrends International, LLC.",
+		"Version": "P1.20",
+		"ReleaseDate": "05/19/2021"
+	},
+	"SystemInformation": {
+		"Manufacturer": "",
+		"ProductName": "",
+		"Version": "",
+		"SerialNumber": "",
+		"UUID": "00000000-0000-0000-0000-d05099faa835",
+		"WakeUpType": 6,
+		"SKUNumber": "",
+		"Family": ""
+	},
+	"BaseboardInformation": {
+		"Manufacturer": "ASRockRack",
+		"Product": "X570D4U",
+		"Version": "",
+		"SerialNumber": "209624590000277",
+		"AssetTag": "",
+		"LocationInChassis": "",
+		"BoardType": 10
+	},
+	"SystemEnclosure": {
+		"Manufacturer": "",
+		"Version": "",
+		"SerialNumber": "",
+		"AssetTagNumber": "",
+		"SKUNumber": "Default string"
+	},
+	"ProcessorInformation": [
+		{
+			"SocketDesignation": "CPUSocket",
+			"ProcessorManufacturer": "Advanced Micro Devices, Inc.",
+			"ProcessorVersion": "AMD Ryzen 9 5900X 12-Core Processor",
+			"MaxSpeed": 4950,
+			"CurrentSpeed": 3700,
+			"Status": 65,
+			"SerialNumber": "Unknown",
+			"AssetTag": "Unknown",
+			"PartNumber": "Unknown",
+			"CoreCount": 12,
+			"CoreEnabled": 12,
+			"ThreadCount": 24
+		}
+	],
+	"CacheInformation": [
+		{
+			"SocketDesignation": "L1 - Cache"
+		},
+		{
+			"SocketDesignation": "L2 - Cache"
+		},
+		{
+			"SocketDesignation": "L3 - Cache"
+		}
+	],
+	"PortConnectorInformation": null,
+	"SystemSlots": null,
+	"OEMStrings": {
+		"Count": 1,
+		"Strings": [
+			"Default string"
+		]
+	},
+	"SystemConfigurationOptions": {
+		"Count": 0,
+		"Strings": null
+	},
+	"BIOSLanguageInformation": {
+		"CurrentLanguage": "en|US|iso8859-1",
+		"InstallableLanguages": [
+			"en|US|iso8859-1"
+		]
+	},
+	"GroupAssociations": {
+		"GroupName": ""
+	},
+	"PhysicalMemoryArray": {
+		"Location": 3,
+		"Use": 3,
+		"MemoryErrorCorrection": 3,
+		"MaximumCapacity": 134217728,
+		"MemoryErrorInformationHandle": 12,
+		"NumberOfMemoryDevices": 4,
+		"ExtendedMaximumCapacity": 0
+	},
+	"MemoryDevices": [
+		{
+			"PhysicalMemoryArrayHandle": 13,
+			"MemoryErrorInformationHandle": 20,
+			"TotalWidth": 65535,
+			"DataWidth": 65535,
+			"Size": 0,
+			"FormFactor": 2,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 0",
+			"BankLocator": "P0 CHANNEL A",
+			"MemoryType": 2,
+			"TypeDetail": 4,
+			"Speed": 0,
+			"Manufacturer": "Unknown",
+			"SerialNumber": "Unknown",
+			"AssetTag": "",
+			"PartNumber": "Unknown",
+			"Attributes": 0,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 0,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 13,
+			"MemoryErrorInformationHandle": 22,
+			"TotalWidth": 64,
+			"DataWidth": 64,
+			"Size": 32767,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 1",
+			"BankLocator": "P0 CHANNEL A",
+			"MemoryType": 26,
+			"TypeDetail": 128,
+			"Speed": 2400,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "254857A6",
+			"AssetTag": "",
+			"PartNumber": "KF3200C16D4/32GX",
+			"Attributes": 2,
+			"ExtendedSize": 32768,
+			"ConfiguredMemorySpeed": 2400,
+			"MinimumVoltage": 1200,
+			"MaximumVoltage": 1200,
+			"ConfiguredVoltage": 1200
+		},
+		{
+			"PhysicalMemoryArrayHandle": 13,
+			"MemoryErrorInformationHandle": 25,
+			"TotalWidth": 65535,
+			"DataWidth": 65535,
+			"Size": 0,
+			"FormFactor": 2,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 0",
+			"BankLocator": "P0 CHANNEL B",
+			"MemoryType": 2,
+			"TypeDetail": 4,
+			"Speed": 0,
+			"Manufacturer": "Unknown",
+			"SerialNumber": "Unknown",
+			"AssetTag": "",
+			"PartNumber": "Unknown",
+			"Attributes": 0,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 0,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		},
+		{
+			"PhysicalMemoryArrayHandle": 13,
+			"MemoryErrorInformationHandle": 27,
+			"TotalWidth": 64,
+			"DataWidth": 64,
+			"Size": 32767,
+			"FormFactor": 9,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 1",
+			"BankLocator": "P0 CHANNEL B",
+			"MemoryType": 26,
+			"TypeDetail": 128,
+			"Speed": 2400,
+			"Manufacturer": "Kingston",
+			"SerialNumber": "2048690C",
+			"AssetTag": "",
+			"PartNumber": "KF3200C16D4/32GX",
+			"Attributes": 2,
+			"ExtendedSize": 32768,
+			"ConfiguredMemorySpeed": 2400,
+			"MinimumVoltage": 1200,
+			"MaximumVoltage": 1200,
+			"ConfiguredVoltage": 1200
+		}
+	]
+}
