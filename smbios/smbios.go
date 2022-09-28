@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/digitalocean/go-smbios/smbios"
 )
@@ -153,6 +154,11 @@ func GetStringOrEmpty(s *smbios.Structure, offset int) string {
 
 	str := s.Strings[index-1]
 	trimmed := strings.TrimSpace(str)
+
+	// Do not pass on invalid UTF8 strings as this can blow up grpc
+	if !utf8.ValidString(trimmed) {
+		return _Empty
+	}
 
 	// Convert to lowercase to address multiple formats:
 	//   - "To Be Filled By O.E.M."
