@@ -401,7 +401,8 @@ const (
 )
 
 // String returns the string representation of this `MemoryType` enum constant.
-//nolint: gocyclo, cyclop
+//
+//nolint:gocyclo,cyclop
 func (m MemoryType) String() string {
 	switch m {
 	case MemoryTypeOther:

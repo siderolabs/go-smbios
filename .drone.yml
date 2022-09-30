@@ -1,7 +1,7 @@
 ---
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2021-11-22T12:46:51Z by kres c4d092b.
+# Generated on 2022-09-30T12:50:10Z by kres fe71103.
 
 kind: pipeline
 type: kubernetes
@@ -207,6 +207,12 @@ volumes:
   temp:
     medium: memory
 
+trigger:
+  branch:
+    exclude:
+    - renovate/*
+    - dependabot/*
+
 ---
 kind: pipeline
 type: kubernetes
@@ -234,6 +240,10 @@ steps:
     - failure
 
 trigger:
+  branch:
+    exclude:
+    - renovate/*
+    - dependabot/*
   status:
   - success
   - failure

@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/talos-systems/go-smbios/smbios"
+	"github.com/siderolabs/go-smbios/smbios"
 )
 
 func TestASRockSingleRyzen(t *testing.T) {
