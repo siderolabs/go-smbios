@@ -187,16 +187,11 @@ func GetWord(s *smbios.Structure, offset int) uint16 {
 	// the `Formatted` byte slice is missing the first 4 bytes of the structure that are stripped out as header info.
 	// so we need to subtract 4 from the offset mentioned in the SMBIOS documentation to get the right value.
 	index := offset - 4
-	if index >= len(s.Formatted) {
+	if index+2 > len(s.Formatted) {
 		return 0
 	}
 
-	b := s.Formatted[index : index+2]
-	if len(b) != 2 {
-		return 0
-	}
-
-	return binary.LittleEndian.Uint16(b)
+	return binary.LittleEndian.Uint16(s.Formatted[index : index+2])
 }
 
 // GetDWord retrieves a 32-bit unsigned integer at the given offset.
@@ -204,16 +199,11 @@ func GetDWord(s *smbios.Structure, offset int) uint32 {
 	// the `Formatted` byte slice is missing the first 4 bytes of the structure that are stripped out as header info.
 	// so we need to subtract 4 from the offset mentioned in the SMBIOS documentation to get the right value.
 	index := offset - 4
-	if index >= len(s.Formatted) {
+	if index+4 > len(s.Formatted) {
 		return 0
 	}
 
-	b := s.Formatted[index : index+4]
-	if len(b) != 4 {
-		return 0
-	}
-
-	return binary.LittleEndian.Uint32(b)
+	return binary.LittleEndian.Uint32(s.Formatted[index : index+4])
 }
 
 // GetQWord retrieves a 64-bit unsigned integer at the given offset.
@@ -221,16 +211,11 @@ func GetQWord(s *smbios.Structure, offset int) uint64 {
 	// the `Formatted` byte slice is missing the first 4 bytes of the structure that are stripped out as header info.
 	// so we need to subtract 4 from the offset mentioned in the SMBIOS documentation to get the right value.
 	index := offset - 4
-	if index >= len(s.Formatted) {
+	if index+8 > len(s.Formatted) {
 		return 0
 	}
 
-	b := s.Formatted[index : index+8]
-	if len(b) != 8 {
-		return 0
-	}
-
-	return binary.LittleEndian.Uint64(b)
+	return binary.LittleEndian.Uint64(s.Formatted[index : index+8])
 }
 
 // IsNthBitSet returns true if the `n`th bit is 1 inside `b`.
