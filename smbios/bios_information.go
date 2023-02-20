@@ -4,7 +4,7 @@
 
 package smbios
 
-import "github.com/digitalocean/go-smbios/smbios"
+import "github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
 
 // BIOSInformation represents the BIOS information.
 type BIOSInformation struct {

@@ -7,7 +7,7 @@ package smbios
 import (
 	"fmt"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
 )
 
 // PhysicalMemoryArray represents the SMBIOS physical memory array.

@@ -11,7 +11,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
 )
 
 // Version represents the System Management BIOS version.

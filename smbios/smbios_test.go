@@ -14,20 +14,24 @@ import (
 	"github.com/siderolabs/go-smbios/smbios"
 )
 
-func TestASRockSingleRyzen(t *testing.T) {
-	DoTestDesktopManagementInterface(t, "ASRock-Single-Ryzen")
-}
+func TestDecode(t *testing.T) {
+	t.Parallel()
 
-func TestDellPowerEdgeR630DualXeon(t *testing.T) {
-	DoTestDesktopManagementInterface(t, "Dell-PowerEdge-R630-Dual-Xeon")
-}
+	for _, name := range []string{
+		"ASRock-Single-Ryzen",
+		"Dell-PowerEdge-R630-Dual-Xeon",
+		"SuperMicro-Dual-Xeon",
+		"SuperMicro-Quad-Opteron",
+		"HyperV",
+	} {
+		name := name
 
-func TestDellSuperMicroDualXeon(t *testing.T) {
-	DoTestDesktopManagementInterface(t, "SuperMicro-Dual-Xeon")
-}
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
 
-func TestDellSuperMicroQuadOpteron(t *testing.T) {
-	DoTestDesktopManagementInterface(t, "SuperMicro-Quad-Opteron")
+			DoTestDesktopManagementInterface(t, name)
+		})
+	}
 }
 
 func DoTestDesktopManagementInterface(t *testing.T, name string) {

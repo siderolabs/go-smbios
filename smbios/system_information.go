@@ -9,8 +9,9 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/digitalocean/go-smbios/smbios"
 	"github.com/google/uuid"
+
+	"github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
 )
 
 // SystemInformation represents the SMBIOS system information.

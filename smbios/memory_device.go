@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
 )
 
 // MemoryDevice represents a SMBIOS memory device.

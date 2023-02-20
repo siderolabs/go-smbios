@@ -1,0 +1,62 @@
+{
+  "Version": { "Major": 3, "Minor": 3, "Revision": 0 },
+  "BIOSInformation": {
+    "Vendor": "American Megatrends Inc.",
+    "Version": "090008",
+    "ReleaseDate": "12/07/2018"
+  },
+  "SystemInformation": {
+    "Manufacturer": "Microsoft Corporation",
+    "ProductName": "Virtual Machine",
+    "Version": "7.0",
+    "SerialNumber": "1519-7810-4472-8775-7272-8851-12",
+    "UUID": "b26849ef-4fb0-4e03-a9d1-1a165a40c8d7",
+    "WakeUpType": 6,
+    "SKUNumber": "",
+    "Family": ""
+  },
+  "BaseboardInformation": {
+    "Manufacturer": "Microsoft Corporation",
+    "Product": "Virtual Machine",
+    "Version": "7.0",
+    "SerialNumber": "1519-7810-4472-8775-7272-8851-12",
+    "AssetTag": "",
+    "LocationInChassis": "",
+    "BoardType": 0
+  },
+  "SystemEnclosure": {
+    "Manufacturer": "Microsoft Corporation",
+    "Version": "7.0",
+    "SerialNumber": "1519-7810-4472-8775-7272-8851-12",
+    "AssetTagNumber": "",
+    "SKUNumber": ""
+  },
+  "ProcessorInformation": null,
+  "CacheInformation": null,
+  "PortConnectorInformation": null,
+  "SystemSlots": null,
+  "OEMStrings": {
+    "Strings": [
+      "[MS_VM_CERT/SHA1/9b80ca0d5dd061ec9da4e494f4c3fd1196270c22]",
+      "00000000000000000000000000000000",
+      "To be filed by MSFT"
+    ],
+    "Count": 3
+  },
+  "SystemConfigurationOptions": { "Strings": null, "Count": 0 },
+  "BIOSLanguageInformation": {
+    "CurrentLanguage": "",
+    "InstallableLanguages": null
+  },
+  "GroupAssociations": { "GroupName": "" },
+  "PhysicalMemoryArray": {
+    "Location": 0,
+    "Use": 0,
+    "MemoryErrorCorrection": 0,
+    "MaximumCapacity": 0,
+    "MemoryErrorInformationHandle": 0,
+    "NumberOfMemoryDevices": 0,
+    "ExtendedMaximumCapacity": 0
+  },
+  "MemoryDevices": null
+}
