@@ -33,6 +33,12 @@ func TestDecoder(t *testing.T) {
 		{
 			name: "short header",
 			b:    []byte{0x00},
+			ss: []*smbios.Structure{{
+				Header: smbios.Header{
+					Type: 127,
+				},
+			}},
+			ok: true,
 		},
 		{
 			name: "length too short",
@@ -50,14 +56,6 @@ func TestDecoder(t *testing.T) {
 			},
 		},
 		{
-			name: "no end of table",
-			b: []byte{
-				0x01, 0x04, 0x01, 0x00,
-				0x00,
-				0x00,
-			},
-		},
-		{
 			name: "bad second message",
 			b: []byte{
 				0x01, 0x0c, 0x02, 0x00,
@@ -67,6 +65,46 @@ func TestDecoder(t *testing.T) {
 
 				0xff,
 			},
+			ss: []*smbios.Structure{
+				{
+					Header: smbios.Header{
+						Type:   1,
+						Length: 12,
+						Handle: 2,
+					},
+					Formatted: []uint8{0xde, 0xad, 0xbe, 0xef, 0xde, 0xad, 0xbe, 0xef},
+					Strings:   []string{"deadbeef"},
+				},
+				{
+					Header: smbios.Header{
+						Type: 127,
+					},
+				},
+			},
+			ok: true,
+		},
+		{
+			name: "no end of table",
+			b: []byte{
+				0x01, 0x04, 0x01, 0x00,
+				0x00,
+				0x00,
+			},
+			ss: []*smbios.Structure{
+				{
+					Header: smbios.Header{
+						Type:   1,
+						Length: 4,
+						Handle: 1,
+					},
+				},
+				{
+					Header: smbios.Header{
+						Type: 127,
+					},
+				},
+			},
+			ok: true,
 		},
 		{
 			name: "OK, one, no format, no strings",

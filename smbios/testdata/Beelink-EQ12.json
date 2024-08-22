@@ -1,0 +1,187 @@
+{
+	"Version": {
+		"Major": 3,
+		"Minor": 3,
+		"Revision": 0
+	},
+	"BIOSInformation": {
+		"Vendor": "",
+		"Version": "",
+		"ReleaseDate": ""
+	},
+	"SystemInformation": {
+		"Manufacturer": "AZW",
+		"ProductName": "EQ",
+		"Version": "Default string",
+		"SerialNumber": "BN1004GH10075",
+		"UUID": "03000200-0400-0500-0006-000700080009",
+		"WakeUpType": 6,
+		"SKUNumber": "Default string",
+		"Family": "Default string"
+	},
+	"BaseboardInformation": {
+		"Manufacturer": "AZW",
+		"Product": "EQ",
+		"Version": "Default string",
+		"SerialNumber": "Default string",
+		"AssetTag": "Default string",
+		"LocationInChassis": "Default string",
+		"BoardType": 10
+	},
+	"SystemEnclosure": {
+		"Manufacturer": "Default string",
+		"Version": "Default string",
+		"SerialNumber": "Default string",
+		"AssetTagNumber": "",
+		"SKUNumber": "Default string"
+	},
+	"ProcessorInformation": [
+		{
+			"SocketDesignation": "U3E1",
+			"ProcessorManufacturer": "Intel(R) Corporation",
+			"ProcessorVersion": "Intel(R) N100",
+			"MaxSpeed": 3400,
+			"CurrentSpeed": 2871,
+			"Status": 65,
+			"SerialNumber": "",
+			"AssetTag": "",
+			"PartNumber": "",
+			"CoreCount": 4,
+			"CoreEnabled": 4,
+			"ThreadCount": 4
+		}
+	],
+	"CacheInformation": [
+		{
+			"SocketDesignation": "L1 Cache"
+		},
+		{
+			"SocketDesignation": "L1 Cache"
+		},
+		{
+			"SocketDesignation": "L2 Cache"
+		},
+		{
+			"SocketDesignation": "L3 Cache"
+		}
+	],
+	"PortConnectorInformation": [
+		{
+			"InternalReferenceDesignator": "Internal Connector 1",
+			"ExternalReferenceDesignator": "External Connector 1"
+		},
+		{
+			"InternalReferenceDesignator": "Internal Connector 2",
+			"ExternalReferenceDesignator": "External Connector 2"
+		},
+		{
+			"InternalReferenceDesignator": "Internal Connector 3",
+			"ExternalReferenceDesignator": "External Connector 3"
+		},
+		{
+			"InternalReferenceDesignator": "Internal Connector 4",
+			"ExternalReferenceDesignator": "External Connector 4"
+		},
+		{
+			"InternalReferenceDesignator": "Internal Connector 5",
+			"ExternalReferenceDesignator": "External Connector 5"
+		}
+	],
+	"SystemSlots": [
+		{
+			"SlotDesignation": "Slot 1"
+		},
+		{
+			"SlotDesignation": "Slot 2"
+		},
+		{
+			"SlotDesignation": "Slot 3"
+		},
+		{
+			"SlotDesignation": "Slot 4"
+		},
+		{
+			"SlotDesignation": "Slot 5"
+		}
+	],
+	"OEMStrings": {
+		"Strings": [
+			"Default string"
+		],
+		"Count": 1
+	},
+	"SystemConfigurationOptions": {
+		"Strings": [
+			"Default string"
+		],
+		"Count": 1
+	},
+	"BIOSLanguageInformation": {
+		"CurrentLanguage": "en|US|iso8859-1",
+		"InstallableLanguages": [
+			"en|US|iso8859-1"
+		]
+	},
+	"GroupAssociations": {
+		"GroupName": ""
+	},
+	"PhysicalMemoryArray": {
+		"Location": 3,
+		"Use": 3,
+		"MemoryErrorCorrection": 3,
+		"MaximumCapacity": 67108864,
+		"MemoryErrorInformationHandle": 65534,
+		"NumberOfMemoryDevices": 2,
+		"ExtendedMaximumCapacity": 0
+	},
+	"MemoryDevices": [
+		{
+			"PhysicalMemoryArrayHandle": 39,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 64,
+			"DataWidth": 64,
+			"Size": 16384,
+			"FormFactor": 13,
+			"DeviceSet": "",
+			"DeviceLocator": "Controller0-ChannelA-DIMM0",
+			"BankLocator": "BANK 0",
+			"MemoryType": 34,
+			"TypeDetail": 128,
+			"Speed": 5600,
+			"Manufacturer": "Crucial Technology",
+			"SerialNumber": "E8FBFFE2",
+			"AssetTag": "9876543210",
+			"PartNumber": "CT16G56C46S5.M8G1",
+			"Attributes": 1,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 4800,
+			"MinimumVoltage": 1100,
+			"MaximumVoltage": 1100,
+			"ConfiguredVoltage": 1100
+		},
+		{
+			"PhysicalMemoryArrayHandle": 39,
+			"MemoryErrorInformationHandle": 65534,
+			"TotalWidth": 0,
+			"DataWidth": 0,
+			"Size": 0,
+			"FormFactor": 2,
+			"DeviceSet": "",
+			"DeviceLocator": "Controller1-ChannelA-DIMM0",
+			"BankLocator": "BANK 0",
+			"MemoryType": 2,
+			"TypeDetail": 0,
+			"Speed": 0,
+			"Manufacturer": "",
+			"SerialNumber": "",
+			"AssetTag": "",
+			"PartNumber": "",
+			"Attributes": 0,
+			"ExtendedSize": 0,
+			"ConfiguredMemorySpeed": 0,
+			"MinimumVoltage": 0,
+			"MaximumVoltage": 0,
+			"ConfiguredVoltage": 0
+		}
+	]
+}

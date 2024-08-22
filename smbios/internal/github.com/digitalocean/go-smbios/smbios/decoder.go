@@ -18,6 +18,7 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"io"
 )
@@ -99,11 +100,21 @@ func (d *Decoder) next() (*Structure, error) {
 		return nil, err
 	}
 
+	if h == nil {
+		// unexpected structure end, pretend we hit the end of the table
+		return &Structure{
+			Header: Header{
+				Type: typeEndOfTable,
+			},
+		}, nil
+	}
+
 	// Length of formatted section is length specified by header, minus
 	// the length of the header itself.
 	l := int(h.Length) - headerLen
 
-	// Hyper-V SMBIOS tables seem to be broken, implement a workaround
+	// Some SMBIOS tables, for example Hyper-V, seem to be broken, implement a
+	// workaround
 	if h.Length == 0 && h.Type == 0 {
 		return &Structure{
 			Header: Header{
@@ -132,6 +143,12 @@ func (d *Decoder) next() (*Structure, error) {
 // parseHeader parses a Structure's Header from the stream.
 func (d *Decoder) parseHeader() (*Header, error) {
 	if _, err := io.ReadFull(d.br, d.b[:headerLen]); err != nil {
+		// We do the same thing the kernel does in drivers/firmware/dmi_scan.c
+		// since v6.6.39 and return early if we don't have enough bytes for a header
+		if errors.Is(err, io.ErrUnexpectedEOF) || errors.Is(err, io.EOF) {
+			return nil, nil //nolint:nilnil
+		}
+
 		return nil, fmt.Errorf("error reading header: %w", err)
 	}
 
