@@ -24,8 +24,6 @@ func TestDecode(t *testing.T) {
 		"SuperMicro-Quad-Opteron",
 		"HyperV",
 	} {
-		name := name
-
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 

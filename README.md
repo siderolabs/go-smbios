@@ -21,7 +21,7 @@ But this means you can easily get string values by their index, so in the exampl
 The way the Structure struct works for a given type can also be kind of confusing.
 For example, in the doc, the table for system info looks like the following:
 
-<img src="docs/img/system info table.png" width="500">
+<img src="docs/img/system info table.png" width="500" alt="system info table">
 
 But it's important to note that if I'm after a field like `Wake-up Type`, I need to keep in mind that the `Formatted` byte slice is missing the first 4 bytes of the structure that are stripped out as header info.
 So if `Wake-up Type`'s offset is 18h (which is the decimal value 24), I need to subtract 4 to get the correct offset location (which is decimal value 20).

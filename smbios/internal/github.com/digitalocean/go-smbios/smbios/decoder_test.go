@@ -181,6 +181,7 @@ func TestDecoder(t *testing.T) {
 			if tt.ok && err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
+
 			if !tt.ok && err == nil {
 				t.Fatalf("expected an error, but none occurred: %v", err)
 			}

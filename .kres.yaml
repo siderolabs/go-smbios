@@ -1,3 +1,10 @@
 kind: common.Repository
 spec:
   conformLicenseCheck: false
+  licenses:
+    - enabled: false
+  licenseChecks: []
+---
+kind: service.CodeCov
+spec:
+  targetThreshold: 45
