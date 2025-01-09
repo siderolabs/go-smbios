@@ -229,7 +229,7 @@ func (m MemoryDeviceSize) String() string {
 }
 
 // MemoryDeviceExtendedSize represents the SMBIOS memory device extended size.
-type MemoryDeviceExtendedSize uint16
+type MemoryDeviceExtendedSize uint32
 
 // String returns the string representation of the SMBIOS memory device extended size.
 func (m MemoryDeviceExtendedSize) String() string {
