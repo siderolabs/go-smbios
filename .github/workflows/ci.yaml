@@ -56,7 +56,7 @@ jobs:
           done
         continue-on-error: true
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
