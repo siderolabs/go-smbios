@@ -53,6 +53,7 @@ func New() (*SMBIOS, error) {
 	defer rc.Close()
 
 	var version Version
+
 	version.Major, version.Minor, version.Revision = ep.Version()
 
 	return Decode(rc, version)

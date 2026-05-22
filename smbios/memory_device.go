@@ -6,6 +6,7 @@ package smbios
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 
 	"github.com/siderolabs/go-smbios/smbios/internal/github.com/digitalocean/go-smbios/smbios"
@@ -562,7 +563,7 @@ func (t TypeDetail) Attributes() []TypeDetailAttribute {
 
 	attributes := []TypeDetailAttribute{}
 
-	for i := len(b) - 1; i >= 0; i-- {
+	for i := range slices.Backward(b) {
 		if b[i] == 1 {
 			attributes = append(attributes, TypeDetailAttribute(i))
 		}

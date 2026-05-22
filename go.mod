@@ -1,11 +1,11 @@
 module github.com/siderolabs/go-smbios
 
-go 1.22.6
+go 1.26.3
 
 require (
-	github.com/google/go-cmp v0.6.0
+	github.com/google/go-cmp v0.7.0
 	github.com/google/uuid v1.6.0
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (

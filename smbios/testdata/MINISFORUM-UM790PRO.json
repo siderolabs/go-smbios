@@ -1,0 +1,209 @@
+{
+	"Version": {
+		"Major": 3,
+		"Minor": 3,
+		"Revision": 0
+	},
+	"BIOSInformation": {
+		"Vendor": "",
+		"Version": "",
+		"ReleaseDate": ""
+	},
+	"SystemInformation": {
+		"Manufacturer": "Micro Computer (HK) Tech Limited",
+		"ProductName": "Venus series",
+		"Version": "Default string",
+		"SerialNumber": "MD306VU79PQQMQE00168",
+		"UUID": "27f13b80-49af-11ef-9b05-8814a3404d00",
+		"WakeUpType": 1,
+		"SKUNumber": "Default string",
+		"Family": "Default string"
+	},
+	"BaseboardInformation": {
+		"Manufacturer": "Shenzhen Meigao Electronic Equipment Co.,Ltd",
+		"Product": "F7BSC",
+		"Version": "Default string",
+		"SerialNumber": "K7BSC794030B1081642",
+		"AssetTag": "Default string",
+		"LocationInChassis": "Default string",
+		"BoardType": 10
+	},
+	"SystemEnclosure": {
+		"Manufacturer": "Default string",
+		"Version": "Default string",
+		"SerialNumber": "Default string",
+		"AssetTagNumber": "",
+		"SKUNumber": "Default string"
+	},
+	"ProcessorInformation": [
+		{
+			"SocketDesignation": "FP8",
+			"ProcessorManufacturer": "Advanced Micro Devices, Inc.",
+			"ProcessorVersion": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics",
+			"MaxSpeed": 5250,
+			"CurrentSpeed": 4000,
+			"Status": 65,
+			"SerialNumber": "Unknown",
+			"AssetTag": "Unknown",
+			"PartNumber": "Unknown",
+			"CoreCount": 8,
+			"CoreEnabled": 8,
+			"ThreadCount": 16
+		}
+	],
+	"CacheInformation": [
+		{
+			"SocketDesignation": "L1 - Cache"
+		},
+		{
+			"SocketDesignation": "L2 - Cache"
+		},
+		{
+			"SocketDesignation": "L3 - Cache"
+		}
+	],
+	"PortConnectorInformation": [
+		{
+			"InternalReferenceDesignator": "J126",
+			"ExternalReferenceDesignator": "Keyboard"
+		},
+		{
+			"InternalReferenceDesignator": "J127",
+			"ExternalReferenceDesignator": "Touch pad"
+		},
+		{
+			"InternalReferenceDesignator": "USB Port 5",
+			"ExternalReferenceDesignator": "USB 3.1 Type A"
+		},
+		{
+			"InternalReferenceDesignator": "USB Port 0",
+			"ExternalReferenceDesignator": "USB 3.2 Type-C"
+		},
+		{
+			"InternalReferenceDesignator": "USB Port 1",
+			"ExternalReferenceDesignator": "USB 3.2 Type-C"
+		},
+		{
+			"InternalReferenceDesignator": "USB Port 4",
+			"ExternalReferenceDesignator": "USB 3.2 Type-C"
+		},
+		{
+			"InternalReferenceDesignator": "J90",
+			"ExternalReferenceDesignator": "Network"
+		},
+		{
+			"InternalReferenceDesignator": "J25",
+			"ExternalReferenceDesignator": "eDP"
+		},
+		{
+			"InternalReferenceDesignator": "J37",
+			"ExternalReferenceDesignator": "NOVA DP"
+		},
+		{
+			"InternalReferenceDesignator": "J9",
+			"ExternalReferenceDesignator": "Microphone"
+		},
+		{
+			"InternalReferenceDesignator": "J10",
+			"ExternalReferenceDesignator": "Headphone"
+		}
+	],
+	"SystemSlots": [
+		{
+			"SlotDesignation": "J97"
+		},
+		{
+			"SlotDesignation": "J98"
+		},
+		{
+			"SlotDesignation": "J103"
+		},
+		{
+			"SlotDesignation": "J91"
+		},
+		{
+			"SlotDesignation": "U93"
+		}
+	],
+	"OEMStrings": {
+		"Strings": [
+			"Default string"
+		],
+		"Count": 1
+	},
+	"SystemConfigurationOptions": {
+		"Strings": [
+			"Default string"
+		],
+		"Count": 1
+	},
+	"BIOSLanguageInformation": {
+		"CurrentLanguage": "en|US|iso8859-1",
+		"InstallableLanguages": [
+			"en|US|iso8859-1",
+			"zh|CN|unicode"
+		]
+	},
+	"GroupAssociations": {
+		"GroupName": ""
+	},
+	"PhysicalMemoryArray": {
+		"Location": 3,
+		"Use": 3,
+		"MemoryErrorCorrection": 3,
+		"MaximumCapacity": 67108864,
+		"MemoryErrorInformationHandle": 15,
+		"NumberOfMemoryDevices": 2,
+		"ExtendedMaximumCapacity": 0
+	},
+	"MemoryDevices": [
+		{
+			"PhysicalMemoryArrayHandle": 16,
+			"MemoryErrorInformationHandle": 18,
+			"TotalWidth": 64,
+			"DataWidth": 64,
+			"Size": 32767,
+			"FormFactor": 13,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 0",
+			"BankLocator": "P0 CHANNEL A",
+			"MemoryType": 34,
+			"TypeDetail": 128,
+			"Speed": 5600,
+			"Manufacturer": "Micron Technology",
+			"SerialNumber": "EB159FFA",
+			"AssetTag": "",
+			"PartNumber": "CT32G56C46S5.M16B2",
+			"Attributes": 2,
+			"ExtendedSize": 32768,
+			"ConfiguredMemorySpeed": 5600,
+			"MinimumVoltage": 1100,
+			"MaximumVoltage": 1100,
+			"ConfiguredVoltage": 1100
+		},
+		{
+			"PhysicalMemoryArrayHandle": 16,
+			"MemoryErrorInformationHandle": 21,
+			"TotalWidth": 64,
+			"DataWidth": 64,
+			"Size": 32767,
+			"FormFactor": 13,
+			"DeviceSet": "",
+			"DeviceLocator": "DIMM 0",
+			"BankLocator": "P0 CHANNEL B",
+			"MemoryType": 34,
+			"TypeDetail": 128,
+			"Speed": 5600,
+			"Manufacturer": "Micron Technology",
+			"SerialNumber": "EB159FD4",
+			"AssetTag": "",
+			"PartNumber": "CT32G56C46S5.M16B2",
+			"Attributes": 2,
+			"ExtendedSize": 32768,
+			"ConfiguredMemorySpeed": 5600,
+			"MinimumVoltage": 1100,
+			"MaximumVoltage": 1100,
+			"ConfiguredVoltage": 1100
+		}
+	]
+}

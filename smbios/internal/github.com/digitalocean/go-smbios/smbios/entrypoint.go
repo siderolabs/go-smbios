@@ -122,6 +122,7 @@ func parse32(b []byte) (*EntryPoint32Bit, error) {
 
 	// Entry point checksum occurs at index 4, compute and verify it.
 	const epChkIndex = 4
+
 	epChk := b[epChkIndex]
 
 	if err := checksum(epChk, epChkIndex, b[:length]); err != nil {

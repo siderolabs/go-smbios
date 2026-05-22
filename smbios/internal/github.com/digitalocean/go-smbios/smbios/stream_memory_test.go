@@ -57,6 +57,7 @@ func Test_memoryStream(t *testing.T) {
 				// Just enough information to point to an address
 				// that contains the structure stream.
 				const addr = 0x00f0
+
 				epb := mustMarshalEntryPoint(&EntryPoint64Bit{
 					StructureTableMaxSize: 512,
 					StructureTableAddress: addr,

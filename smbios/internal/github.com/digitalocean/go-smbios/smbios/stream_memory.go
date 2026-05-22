@@ -81,6 +81,7 @@ func findEntryPoint(rs io.ReadSeeker, start, end int) (int, error) {
 	// Iterate one "paragraph" of memory at a time until we either find the entry point
 	// or reach the end bound.
 	const paragraph = 16
+
 	b := make([]byte, paragraph)
 
 	var (

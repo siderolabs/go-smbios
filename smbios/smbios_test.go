@@ -24,6 +24,7 @@ func TestDecode(t *testing.T) {
 		"SuperMicro-Quad-Opteron",
 		"HyperV",
 		"Beelink-EQ12",
+		"MINISFORUM-UM790PRO",
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()

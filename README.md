@@ -2,7 +2,7 @@
 
 Some notes on using this package:
 
-All possible smbios info is document in the spec [here](https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_2.7.1.pdf).
+All possible smbios info is documented in the [smbios spec](https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_2.7.1.pdf).
 
 The underlying DigitalOcean smbios library provides a struct for each smbios structure with the given format below.
 
