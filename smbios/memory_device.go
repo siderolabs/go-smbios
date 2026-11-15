@@ -154,7 +154,7 @@ func NewMemoryDevice(s *smbios.Structure) *MemoryDevice {
 		AssetTag:                     GetStringOrEmpty(s, 0x19),
 		PartNumber:                   GetStringOrEmpty(s, 0x1A),
 		Attributes:                   GetByte(s, 0x1B),
-		ExtendedSize:                 MemoryDeviceExtendedSize(GetDWord(s, 0x1C)),
+		ExtendedSize:                 MemoryDeviceExtendedSize(GetDWord(s, 0x1C) & 0x7FFFFFFF), // bit 31 is reserved
 		ConfiguredMemorySpeed:        MemoryDeviceSpeed(GetWord(s, 0x20)),
 		MinimumVoltage:               MemoryDeviceVoltage(GetWord(s, 0x22)),
 		MaximumVoltage:               MemoryDeviceVoltage(GetWord(s, 0x24)),
@@ -230,7 +230,7 @@ func (m MemoryDeviceSize) String() string {
 }
 
 // MemoryDeviceExtendedSize represents the SMBIOS memory device extended size.
-type MemoryDeviceExtendedSize uint16
+type MemoryDeviceExtendedSize uint32
 
 // String returns the string representation of the SMBIOS memory device extended size.
 func (m MemoryDeviceExtendedSize) String() string {

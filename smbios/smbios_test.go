@@ -25,6 +25,7 @@ func TestDecode(t *testing.T) {
 		"HyperV",
 		"Beelink-EQ12",
 		"MINISFORUM-UM790PRO",
+		"QEMU-libvirt-64GiB",
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
